@@ -1,1 +1,1 @@
-# react-boilerplate
+# finance-manager
