@@ -2,10 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'react-router-redux'
 import styledNormalize from 'styled-normalize';
 import { injectGlobal } from 'styled-components';
 import App from './App';
 import configureStore from './store/configureStore';
+import history from './history'
 
 const baseStyles = () => injectGlobal`
   ${styledNormalize}
@@ -20,9 +22,11 @@ const render = (Component) => {
   baseStyles();
   ReactDOM.render(
     <Provider store={store}>
-      <AppContainer>
-        <Component />
-      </AppContainer>
+      <ConnectedRouter history={history}>
+        <AppContainer>
+          <Component />
+        </AppContainer>
+      </ConnectedRouter>
     </Provider>,
     rootEl,
   );

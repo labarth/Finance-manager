@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import styled from 'styled-components';
 import toggleTitleAction from './redux/actions/toggleTitle';
+import MainPage from './pages/MainPage';
 
 const Title = styled.h1`
   font-size: 30px;
@@ -48,9 +50,17 @@ class App extends PureComponent {
     const { title } = this.props;
 
     return (
-      <Title onClick={this.handleClick}>
-        {title}
-      </Title>
+      <div>
+        <Title onClick={this.handleClick}>
+          {title}
+        </Title>
+        <Router>
+          <div>
+            <Link to={`/main`}> Main page</Link>
+            <Route path="/main" component={MainPage} />
+          </div>
+        </Router>
+      </div>
     );
   }
 }
