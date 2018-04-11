@@ -7,8 +7,9 @@ module.exports = {
     "jsx-a11y/anchor-is-valid": [ "error", {
       "components": [ "Link" ],
       "specialLink": [ "to" ]
-    }]
-
+    }],
+    "import/extensions": ["error", "never", { "packages": "always" }],
+    "import/no-unresolved": "off",
   },
   "env": {
     "browser": true,

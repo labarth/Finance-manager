@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import TextField from '../components/TextField';
+import TextField from 'components/TextField';
 
 class SignInPage extends PureComponent {
   render() {
