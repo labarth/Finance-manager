@@ -1,8 +1,8 @@
+import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import toggleTitleAction from '../redux/actions/toggleTitle';
-import PropTypes from 'prop-types'
 
 const Title = styled.h1`
   font-size: 30px;
@@ -46,7 +46,7 @@ class MainPage extends PureComponent {
 
   render() {
     const { title } = this.props;
-    return(
+    return (
       <div>
         <div>
           <Title onClick={this.handleClick}>

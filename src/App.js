@@ -1,21 +1,17 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import MainPage from './pages/MainPage';
+import SignInPage from './pages/SignInPage';
 
 
-class App extends PureComponent {
-  render() {
-    return (
-      <div>
-        <Router>
-          <div>
-            <Link to={`/main`}> Main page</Link>
-            <Route path="/main" component={MainPage} />
-          </div>
-        </Router>
-      </div>
-    );
-  }
-}
+const App = () => (
+  <Router>
+    <div>
+      <Link to="/main"> Main page</Link>
+      <Route path="/main" component={MainPage} />
+      <Route path="/signin" component={SignInPage} />
+    </div>
+  </Router>
+);
 
 export default App;

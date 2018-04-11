@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const srcDir = path.resolve(__dirname, 'src');
 
 const plugins = [
   new webpack.HotModuleReplacementPlugin(),
@@ -8,12 +9,13 @@ const plugins = [
 ];
 
 module.exports = {
+  context: srcDir,
   entry: [
     'babel-polyfill',
     'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
-    './src/index.js',
+    './index.js',
   ],
   output: {
     path: path.resolve(__dirname, 'build'),
