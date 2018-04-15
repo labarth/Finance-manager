@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
+import firebase from 'firebase';
+import * as EmailValidator from 'email-validator';
 import styled from 'styled-components';
-import { signInWithGoogle, signOutWithGoogle } from 'redux/reducer/reducers/authWithGoogle';
+import { signInWithGoogle } from 'redux/reducer/reducers/authWithGoogle';
 import TextField from 'components/TextField';
 import Button from 'components/Button';
 import Spacer from 'components/Spacer';
@@ -20,24 +22,50 @@ const FormComponent = styled.div`
 
 
 class SignInPage extends PureComponent {
+  state = {
+    validEmail: false,
+    validPassword: false,
+    password: '',
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
+    firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  handleEmailValidate = () => {
+    EmailValidator.validate(this.state.email)
+      ?
+      this.setState({ validEmail: true })
+      :
+      this.setState({ validEmail: false });
+  }
+
+  handlePasswordValidate = () => {
+    (this.state.password.length >= 8)
+      ?
+      this.setState({ validPassword: true })
+      :
+      this.setState({ validPassword: false });
   }
 
   handleChange = (e) => {
     const { name, value } = e.target;
-
-    this.setState({
-      [name]: value,
+    this.setState({ [name]: value }, () => {
+      this.handleEmailValidate();
+      this.handlePasswordValidate();
     });
   }
 
   handleSingInWithGoogle = () => signInWithGoogle();
 
-  handleSignOut = () => signOutWithGoogle();
-
-
   render() {
+    const { validEmail, validPassword } = this.state;
+    const canSubmitForm = validEmail && validPassword;
+
     return (
       <WrapperComponent>
         <FormComponent>
@@ -49,7 +77,7 @@ class SignInPage extends PureComponent {
               <TextField type="password" placeholder="Enter password..." name="password" onChange={this.handleChange} />
             </Spacer>
             <Spacer>
-              <Button text="Sing In" />
+              <Button text="Sing Up" disabled={!canSubmitForm} />
             </Spacer>
           </form>
           <Spacer>

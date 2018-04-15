@@ -10,9 +10,10 @@ module.exports = {
     }],
     "import/extensions": ["error", "never", { "packages": "always" }],
     "import/no-unresolved": "off",
-    "object-curly-newline": ["error", {
+    "object-curly-newline": [0, {
       "ObjectExpression": "always",
     }],
+    "no-unused-expressions": [2, { allowTernary: true }],
   },
   "env": {
     "browser": true,
