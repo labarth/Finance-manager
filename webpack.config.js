@@ -9,13 +9,12 @@ const plugins = [
 ];
 
 module.exports = {
-  context: srcDir,
   entry: [
     'babel-polyfill',
     'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
-    './index.js',
+    './src/index.js',
   ],
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -28,7 +27,7 @@ module.exports = {
       'node_modules',
     ],
   },
-  devtool: 'cheap-eval-source-map',
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {

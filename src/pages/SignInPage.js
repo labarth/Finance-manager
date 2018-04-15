@@ -1,11 +1,14 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import firebase from 'firebase';
+import { connect } from 'react-redux';
 import * as EmailValidator from 'email-validator';
 import styled from 'styled-components';
-import { signInWithGoogle } from 'redux/reducer/reducers/authWithGoogle';
 import TextField from 'components/TextField';
 import Button from 'components/Button';
 import Spacer from 'components/Spacer';
+import { signInWithGoogle } from 'redux/reducer/reducers/authWithGoogle';
+import { authActions } from 'redux/reducer/reducers/authWithEmailAndPassword';
 
 const WrapperComponent = styled.section`
   display: flex;
@@ -20,19 +23,50 @@ const FormComponent = styled.div`
   width: 360px;
 `;
 
+const mapDispatchToProps = dispatch => ({
+  SING_UP_REQUEST: () => dispatch(authActions.SING_UP_REQUEST()),
+  SING_UP_SUCCESS: data => dispatch(authActions.SING_UP_SUCCESS(data)),
+  SING_UP_ERROR: data => dispatch(authActions.SING_UP_ERROR(data)),
+});
 
+const mapStateToProps = state => ({
+  authWithEmailAndPassword: state.authWithEmailAndPassword,
+});
+
+@connect(mapStateToProps, mapDispatchToProps)
 class SignInPage extends PureComponent {
+  static propTypes = {
+    SING_UP_REQUEST: PropTypes.func,
+    SING_UP_SUCCESS: PropTypes.func,
+    SING_UP_ERROR: PropTypes.func,
+  }
+
+  static defaultProps = {
+    SING_UP_REQUEST: Function.prototype,
+    SING_UP_SUCCESS: Function.prototype,
+    SING_UP_ERROR: Function.prototype,
+  }
+
   state = {
     validEmail: false,
     validPassword: false,
     password: '',
+    email: '',
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+    const { email, password } = this.state;
+    const { SING_UP_REQUEST, SING_UP_SUCCESS, SING_UP_ERROR } = this.props;
+
+    SING_UP_REQUEST();
+
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then((user) => {
+        SING_UP_SUCCESS(user);
+      })
       .catch((error) => {
-        console.log(error);
+        SING_UP_ERROR(error);
       });
   }
 
