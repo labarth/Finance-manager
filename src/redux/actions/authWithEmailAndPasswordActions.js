@@ -1,6 +1,7 @@
 import { createAction } from 'redux-actions';
 import { appId } from 'configFirebase';
-import { moduleName } from '../reducer/reducers/authWithEmailAndPassword';
+
+export const moduleName = 'auth';
 
 export const authActions = {
   SING_UP_REQUEST: createAction(`${appId}/${moduleName}/SIGN_UP_REQUEST`),

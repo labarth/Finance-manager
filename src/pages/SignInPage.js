@@ -2,13 +2,15 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
+import { Record } from 'immutable';
 import * as EmailValidator from 'email-validator';
 import styled from 'styled-components';
 import TextField from 'components/TextField';
 import Button from 'components/Button';
 import Spacer from 'components/Spacer';
+import CircularLoader from 'components/CircularLoader';
 import { signInWithGoogle } from 'redux/reducer/reducers/authWithGoogle';
-import { authActions } from 'redux/reducer/reducers/authWithEmailAndPassword';
+import { authActions } from 'redux/actions/authWithEmailAndPasswordActions';
 
 const WrapperComponent = styled.section`
   display: flex;
@@ -30,7 +32,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  authWithEmailAndPassword: state.authWithEmailAndPassword,
+  AuthWithEmail: state.AuthWithEmail,
 });
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -39,12 +41,14 @@ class SignInPage extends PureComponent {
     SING_UP_REQUEST: PropTypes.func,
     SING_UP_SUCCESS: PropTypes.func,
     SING_UP_ERROR: PropTypes.func,
+    AuthWithEmail: PropTypes.instanceOf(Record),
   }
 
   static defaultProps = {
     SING_UP_REQUEST: Function.prototype,
     SING_UP_SUCCESS: Function.prototype,
     SING_UP_ERROR: Function.prototype,
+    AuthWithEmail: {},
   }
 
   state = {
@@ -98,6 +102,7 @@ class SignInPage extends PureComponent {
 
   render() {
     const { validEmail, validPassword } = this.state;
+    const { AuthWithEmail: { loading } } = this.props;
     const canSubmitForm = validEmail && validPassword;
 
     return (
@@ -111,13 +116,14 @@ class SignInPage extends PureComponent {
               <TextField type="password" placeholder="Enter password..." name="password" onChange={this.handleChange} />
             </Spacer>
             <Spacer>
-              <Button text="Sing Up" disabled={!canSubmitForm} />
+              <Button text="Sing Up" disabled={!canSubmitForm || loading} />
             </Spacer>
           </form>
           <Spacer>
             <Button text="Sign In With Google" onClick={this.handleSingInWithGoogle} />
           </Spacer>
         </FormComponent>
+        {loading ? <CircularLoader /> : null}
       </WrapperComponent>
     );
   }

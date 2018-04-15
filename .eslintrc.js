@@ -10,6 +10,7 @@ module.exports = {
     }],
     "import/extensions": ["error", "never", { "packages": "always" }],
     "import/no-unresolved": "off",
+    "import/prefer-default-export": "off",
     "object-curly-newline": [0, {
       "ObjectExpression": "always",
     }],
