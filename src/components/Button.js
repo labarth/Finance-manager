@@ -5,7 +5,6 @@ import styled from 'styled-components';
 const ButtonComponent = styled.button`
   font-size: 14px;
   line-height: 32px;
-  width: 100%;
   background-color: dodgerblue;
   color: white;
   border-radius: 4px;
@@ -19,13 +18,18 @@ const ButtonComponent = styled.button`
 class Button extends PureComponent {
   static propTypes = {
     text: PropTypes.string.isRequired,
+    onClick: PropTypes.func,
   };
 
+  static defaultProps = {
+    onClick: Function.prototype,
+  }
+
   render() {
-    const { text } = this.props;
+    const { text, onClick } = this.props;
 
     return (
-      <ButtonComponent>{text}</ButtonComponent>
+      <ButtonComponent onClick={onClick}>{text}</ButtonComponent>
     );
   }
 }

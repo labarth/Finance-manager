@@ -18,20 +18,23 @@ class TextField extends PureComponent {
     type: PropTypes.oneOf(inputTypes).isRequired,
     placeholder: PropTypes.string,
     onChange: PropTypes.func,
+    name: PropTypes.string,
   };
 
   static defaultProps = {
     placeholder: 'Enter value',
     onChange: Function.prototype,
+    name: '',
   };
 
   render() {
-    const { type, placeholder, onChange } = this.props;
+    const { type, placeholder, onChange, name } = this.props;
     return (
       <TextFieldComponent
         type={type}
         placeholder={placeholder}
         onChange={onChange}
+        name={name}
       />
     );
   }
