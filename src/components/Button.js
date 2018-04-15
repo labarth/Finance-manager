@@ -4,8 +4,9 @@ import styled from 'styled-components';
 
 const ButtonComponent = styled.button`
   font-size: 14px;
-  line-height: 32px;
+  line-height: 36px;
   background-color: dodgerblue;
+  width: 100%;
   color: white;
   border-radius: 4px;
   border: none;
@@ -13,6 +14,8 @@ const ButtonComponent = styled.button`
   text-transform: uppercase;
   letter-spacing: 1.3px;
   font-family: Verdana, sans-serif;
+  outline: none;
+  padding: 0;
 `;
 
 class Button extends PureComponent {

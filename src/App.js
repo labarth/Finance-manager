@@ -4,6 +4,7 @@ import Page from 'components/Page';
 import MainPage from './pages/MainPage';
 import SignInPage from './pages/SignInPage';
 import './configFirebase';
+import './components/injectGlobalStyledComponent';
 
 
 const App = () => (

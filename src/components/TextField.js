@@ -6,11 +6,12 @@ const inputTypes = ['text', 'number', 'password', 'tel', 'search', 'email'];
 
 export const TextFieldComponent = styled.input`
   min-width: 200px;
-  min-height: 32px;
+  min-height: 36px;
   border-radius: 4px;
   border: 1px solid #aebaca;
   outline: none;
   padding: 0 12px;
+  width: 100%;
 `;
 
 class TextField extends PureComponent {

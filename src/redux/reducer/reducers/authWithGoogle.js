@@ -5,8 +5,8 @@ const provider = new firebase.auth.GoogleAuthProvider();
 export const signInWithGoogle = () => {
   firebase.auth().signInWithPopup(provider)
     .then((result) => {
-      const { credential: { accessToken }, user } = result;
-      console.log(accessToken, user);
+      const { user } = result;
+      console.log(`hello ${user.displayName}`);
     })
     .catch((error) => {
       const { code, message, email, credential } = error;
