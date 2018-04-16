@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { Record } from 'immutable';
 import * as EmailValidator from 'email-validator';
 import styled from 'styled-components';
@@ -11,7 +10,6 @@ import Button from 'components/Button';
 import Spacer from 'components/Spacer';
 import Title from 'components/Title';
 import CircularLoader from 'components/CircularLoader';
-import { signInWithGoogle } from 'redux/reducer/reducers/authWithGoogle';
 import { authActions } from 'redux/actions/authWithEmailAndPasswordActions';
 
 const WrapperComponent = styled.section`
@@ -38,7 +36,7 @@ const mapStateToProps = state => ({
 });
 
 @connect(mapStateToProps, mapDispatchToProps)
-class SignInPage extends PureComponent {
+class SignUpPage extends PureComponent {
   static propTypes = {
     SING_UP_REQUEST: PropTypes.func,
     SING_UP_SUCCESS: PropTypes.func,
@@ -67,7 +65,7 @@ class SignInPage extends PureComponent {
 
     SING_UP_REQUEST();
 
-    firebase.auth().signInWithEmailAndPassword(email, password)
+    firebase.auth().createUserWithEmailAndPassword(email, password)
       .then((user) => {
         SING_UP_SUCCESS(user);
       })
@@ -100,8 +98,6 @@ class SignInPage extends PureComponent {
     });
   }
 
-  handleSingInWithGoogle = () => signInWithGoogle();
-
   render() {
     const { validEmail, validPassword } = this.state;
     const { AuthWithEmail: { loading } } = this.props;
@@ -112,7 +108,7 @@ class SignInPage extends PureComponent {
         <FormComponent>
           <form onSubmit={this.handleSubmit}>
             <Spacer direction="horizontal">
-              <Title title="Sign In" />
+              <Title title="Sign Up" />
             </Spacer>
             <Spacer>
               <TextField type="text" placeholder="Enter Login..." name="email" onChange={this.handleChange} />
@@ -121,17 +117,9 @@ class SignInPage extends PureComponent {
               <TextField type="password" placeholder="Enter password..." name="password" onChange={this.handleChange} />
             </Spacer>
             <Spacer>
-              <Button text="Sing In" disabled={!canSubmitForm || loading} />
+              <Button text="Sing Up" disabled={!canSubmitForm || loading} />
             </Spacer>
           </form>
-          <Spacer>
-            <Button text="Sign In With Google" onClick={this.handleSingInWithGoogle} />
-          </Spacer>
-          <Spacer>
-            <Link to="/signUp">
-              <Button text="Sign Up" />
-            </Link>
-          </Spacer>
         </FormComponent>
         {loading ? <CircularLoader /> : null}
       </WrapperComponent>
@@ -139,4 +127,4 @@ class SignInPage extends PureComponent {
   }
 }
 
-export default SignInPage;
+export default SignUpPage;

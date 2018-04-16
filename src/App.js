@@ -1,19 +1,34 @@
-import React from 'react';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
+import React, { Component } from 'react';
+import firebase from 'firebase';
+import { Route, Switch, withRouter, BrowserRouter as Router } from 'react-router-dom';
 import Page from 'components/Page';
 import MainPage from './pages/MainPage';
+import SignUpPage from './pages/SignUpPage';
 import SignInPage from './pages/SignInPage';
 import './configFirebase';
 import './components/injectGlobalStyledComponent';
 
 
-const App = () => (
-  <Router>
-    <Page>
-      <Route path="/main" component={MainPage} />
-      <Route path="/signin" component={SignInPage} />
-    </Page>
-  </Router>
-);
+class App extends Component {
+  componentWillMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) this.props.history.push('/home');
+    });
+  }
 
-export default App;
+  render() {
+    return (
+      <Router>
+        <Page>
+          <Switch>
+            <Route path="/home" component={MainPage} />
+            <Route path="/signup" component={SignUpPage} />
+            <Route path="/signin" component={SignInPage} />
+          </Switch>
+        </Page>
+      </Router>
+    );
+  }
+}
+
+export default withRouter(App);
