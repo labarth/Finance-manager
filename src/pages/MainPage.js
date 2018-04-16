@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
-import toggleTitleAction from '../redux/actions/toggleTitle';
+import { Link } from 'react-router-dom';
+import Button from 'components/Button';
+import Title from 'components/Title';
+import { signOutWithGoogle } from 'redux/reducer/reducers/authWithGoogle';
+import toggleTitleAction from 'redux/actions/toggleTitle';
 
-const Title = styled.h1`
-  font-size: 30px;
-  color: blue;
-`;
 
 const mapStateToProps = state => ({
   title: state.toggleTitle,
@@ -18,42 +17,30 @@ const mapDispatchToProps = dispatch => ({
 });
 
 @connect(mapStateToProps, mapDispatchToProps)
-class MainPage extends PureComponent {
+class MainPage extends Component {
   static propTypes = {
-    title: PropTypes.string,
-    toggleTitle: PropTypes.func.isRequired,
+    user: PropTypes.object,
   }
 
   static defaultProps = {
-    title: 'undefined title',
+    user: {},
   }
 
-  state = {
-    active: false,
-  };
-
-  handleClick = () => {
-    const { toggleTitle } = this.props;
-
-    this.setState({
-      active: !this.state.active,
-    }, () => (
-      this.state.active ?
-        toggleTitle('deactivate title')
-        :
-        toggleTitle('activate title')));
+  handleSignOut = () => {
+    signOutWithGoogle();
   }
 
   render() {
-    const { title } = this.props;
+    const { user } = this.props;
     return (
       <div>
-        <div>
-          <Title onClick={this.handleClick}>
-            {title}
-          </Title>
-        </div>
-        Main Page
+        <Title title="Main Page" />
+        <p>
+          {`hello ${user.email}`}
+        </p>
+        <Link to="/signin">
+          <Button text="SignOut" onClick={this.handleSignOut} />
+        </Link>
       </div>
     );
   }
