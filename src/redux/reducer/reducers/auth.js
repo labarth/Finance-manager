@@ -1,6 +1,6 @@
 import { Record } from 'immutable';
 import { handleActions } from 'redux-actions';
-import { authActions } from '../../actions/authWithEmailAndPasswordActions';
+import { authActions } from '../../actions/authActions';
 
 const AuthSchema = Record({
   user: null,
@@ -21,8 +21,13 @@ const signUpErrorReducer = (state = initialState, { payload }) => state
   .set('loading', false)
   .set('error', payload);
 
-export const AuthWithEmail = handleActions({
-  [authActions.SING_UP_REQUEST]: signUpRequestReducer,
+const signInSuccessReducer = (state = initialState, { payload }) => state
+  .set('loading', false)
+  .set('user', payload);
+
+export const auth = handleActions({
+  [authActions.SING_REQUEST]: signUpRequestReducer,
   [authActions.SING_UP_SUCCESS]: signUpSuccessReducer,
-  [authActions.SING_UP_ERROR]: signUpErrorReducer,
+  [authActions.SING_ERROR]: signUpErrorReducer,
+  [authActions.SIGN_IN_SUCCESS]: signInSuccessReducer,
 }, initialState);

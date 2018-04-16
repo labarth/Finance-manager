@@ -4,15 +4,15 @@ import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Record } from 'immutable';
-import * as EmailValidator from 'email-validator';
 import styled from 'styled-components';
 import TextField from 'components/TextField';
 import Button from 'components/Button';
 import Spacer from 'components/Spacer';
 import Title from 'components/Title';
+import Modal from 'components/Modal';
 import CircularLoader from 'components/CircularLoader';
 import { signInWithGoogle } from 'redux/reducer/reducers/authWithGoogle';
-import { authActions } from 'redux/actions/authWithEmailAndPasswordActions';
+import { authActions } from 'redux/actions/authActions';
 
 const WrapperComponent = styled.section`
   display: flex;
@@ -28,34 +28,32 @@ const FormComponent = styled.div`
 `;
 
 const mapDispatchToProps = dispatch => ({
-  SING_UP_REQUEST: () => dispatch(authActions.SING_UP_REQUEST()),
-  SING_UP_SUCCESS: data => dispatch(authActions.SING_UP_SUCCESS(data)),
-  SING_UP_ERROR: data => dispatch(authActions.SING_UP_ERROR(data)),
+  SING_REQUEST: () => dispatch(authActions.SING_REQUEST()),
+  SING_IN_SUCCESS: data => dispatch(authActions.SING_UP_SUCCESS(data)),
+  SING_ERROR: data => dispatch(authActions.SING_ERROR(data)),
 });
 
 const mapStateToProps = state => ({
-  AuthWithEmail: state.AuthWithEmail,
+  auth: state.auth,
 });
 
 @connect(mapStateToProps, mapDispatchToProps)
 class SignInPage extends PureComponent {
   static propTypes = {
-    SING_UP_REQUEST: PropTypes.func,
-    SING_UP_SUCCESS: PropTypes.func,
-    SING_UP_ERROR: PropTypes.func,
-    AuthWithEmail: PropTypes.instanceOf(Record),
+    SING_REQUEST: PropTypes.func,
+    SING_IN_SUCCESS: PropTypes.func,
+    SING_ERROR: PropTypes.func,
+    auth: PropTypes.instanceOf(Record),
   }
 
   static defaultProps = {
-    SING_UP_REQUEST: Function.prototype,
-    SING_UP_SUCCESS: Function.prototype,
-    SING_UP_ERROR: Function.prototype,
-    AuthWithEmail: {},
+    SING_REQUEST: Function.prototype,
+    SING_IN_SUCCESS: Function.prototype,
+    SING_ERROR: Function.prototype,
+    auth: {},
   }
 
   state = {
-    validEmail: false,
-    validPassword: false,
     password: '',
     email: '',
   }
@@ -63,49 +61,28 @@ class SignInPage extends PureComponent {
   handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = this.state;
-    const { SING_UP_REQUEST, SING_UP_SUCCESS, SING_UP_ERROR } = this.props;
+    const { SING_REQUEST, SING_IN_SUCCESS, SING_ERROR } = this.props;
 
-    SING_UP_REQUEST();
+    SING_REQUEST();
 
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then((user) => {
-        SING_UP_SUCCESS(user);
+        SING_IN_SUCCESS(user);
       })
       .catch((error) => {
-        SING_UP_ERROR(error);
+        SING_ERROR(error);
       });
-  }
-
-  handleEmailValidate = () => {
-    EmailValidator.validate(this.state.email)
-      ?
-      this.setState({ validEmail: true })
-      :
-      this.setState({ validEmail: false });
-  }
-
-  handlePasswordValidate = () => {
-    (this.state.password.length >= 8)
-      ?
-      this.setState({ validPassword: true })
-      :
-      this.setState({ validPassword: false });
   }
 
   handleChange = (e) => {
     const { name, value } = e.target;
-    this.setState({ [name]: value }, () => {
-      this.handleEmailValidate();
-      this.handlePasswordValidate();
-    });
+    this.setState({ [name]: value });
   }
 
   handleSingInWithGoogle = () => signInWithGoogle();
 
   render() {
-    const { validEmail, validPassword } = this.state;
-    const { AuthWithEmail: { loading } } = this.props;
-    const canSubmitForm = validEmail && validPassword;
+    const { auth: { loading, error } } = this.props;
 
     return (
       <WrapperComponent>
@@ -115,13 +92,13 @@ class SignInPage extends PureComponent {
               <Title title="Sign In" color="#fff" />
             </Spacer>
             <Spacer>
-              <TextField type="text" placeholder="Enter Login..." name="email" onChange={this.handleChange} />
+              <TextField type="text" placeholder="Enter Login..." name="email" onChange={this.handleChange} autoFocus />
             </Spacer>
             <Spacer>
               <TextField type="password" placeholder="Enter password..." name="password" onChange={this.handleChange} />
             </Spacer>
             <Spacer>
-              <Button text="Sing In" disabled={!canSubmitForm || loading} />
+              <Button text="Sing In" disabled={loading} />
             </Spacer>
           </form>
           <Spacer>
@@ -133,7 +110,8 @@ class SignInPage extends PureComponent {
             </Link>
           </Spacer>
         </FormComponent>
-        {loading ? <CircularLoader /> : null}
+        { loading ? <CircularLoader /> : null }
+        { error ? <Modal active>{error.message}</Modal> : null }
       </WrapperComponent>
     );
   }

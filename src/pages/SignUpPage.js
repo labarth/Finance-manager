@@ -10,7 +10,7 @@ import Button from 'components/Button';
 import Spacer from 'components/Spacer';
 import Title from 'components/Title';
 import CircularLoader from 'components/CircularLoader';
-import { authActions } from 'redux/actions/authWithEmailAndPasswordActions';
+import { authActions } from 'redux/actions/authActions';
 
 const WrapperComponent = styled.section`
   display: flex;
@@ -26,9 +26,9 @@ const FormComponent = styled.div`
 `;
 
 const mapDispatchToProps = dispatch => ({
-  SING_UP_REQUEST: () => dispatch(authActions.SING_UP_REQUEST()),
+  SING_REQUEST: () => dispatch(authActions.SING_REQUEST()),
   SING_UP_SUCCESS: data => dispatch(authActions.SING_UP_SUCCESS(data)),
-  SING_UP_ERROR: data => dispatch(authActions.SING_UP_ERROR(data)),
+  SING_ERROR: data => dispatch(authActions.SING_ERROR(data)),
 });
 
 const mapStateToProps = state => ({
@@ -38,16 +38,16 @@ const mapStateToProps = state => ({
 @connect(mapStateToProps, mapDispatchToProps)
 class SignUpPage extends PureComponent {
   static propTypes = {
-    SING_UP_REQUEST: PropTypes.func,
+    SING_REQUEST: PropTypes.func,
     SING_UP_SUCCESS: PropTypes.func,
-    SING_UP_ERROR: PropTypes.func,
+    SING_ERROR: PropTypes.func,
     AuthWithEmail: PropTypes.instanceOf(Record),
   }
 
   static defaultProps = {
-    SING_UP_REQUEST: Function.prototype,
+    SING_REQUEST: Function.prototype,
     SING_UP_SUCCESS: Function.prototype,
-    SING_UP_ERROR: Function.prototype,
+    SING_ERROR: Function.prototype,
     AuthWithEmail: {},
   }
 
@@ -61,16 +61,16 @@ class SignUpPage extends PureComponent {
   handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = this.state;
-    const { SING_UP_REQUEST, SING_UP_SUCCESS, SING_UP_ERROR } = this.props;
+    const { SING_REQUEST, SING_UP_SUCCESS, SING_ERROR } = this.props;
 
-    SING_UP_REQUEST();
+    SING_REQUEST();
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then((user) => {
         SING_UP_SUCCESS(user);
       })
       .catch((error) => {
-        SING_UP_ERROR(error);
+        SING_ERROR(error);
       });
   }
 
@@ -111,7 +111,7 @@ class SignUpPage extends PureComponent {
               <Title title="Sign Up" color="#fff" />
             </Spacer>
             <Spacer>
-              <TextField type="text" placeholder="Enter Login..." name="email" onChange={this.handleChange} />
+              <TextField type="text" placeholder="Enter Login..." name="email" onChange={this.handleChange} autoFocus />
             </Spacer>
             <Spacer>
               <TextField type="password" placeholder="Enter password..." name="password" onChange={this.handleChange} />

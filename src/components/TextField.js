@@ -25,22 +25,25 @@ class TextField extends PureComponent {
     placeholder: PropTypes.string,
     onChange: PropTypes.func,
     name: PropTypes.string,
+    autoFocus: PropTypes.bool,
   };
 
   static defaultProps = {
     placeholder: 'Enter value',
     onChange: Function.prototype,
     name: '',
+    autoFocus: false,
   };
 
   render() {
-    const { type, placeholder, onChange, name } = this.props;
+    const { type, placeholder, onChange, name, autoFocus } = this.props;
     return (
       <TextFieldComponent
         type={type}
         placeholder={placeholder}
         onChange={onChange}
         name={name}
+        autoFocus={autoFocus}
       />
     );
   }
