@@ -8,7 +8,7 @@ import { signOutWithGoogle } from 'redux/reducer/reducers/authWithGoogle';
 
 class MainPage extends Component {
   static propTypes = {
-    user: PropTypes.object,
+    user: PropTypes.shape({}),
   }
 
   static defaultProps = {
