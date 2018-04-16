@@ -112,7 +112,7 @@ class SignInPage extends PureComponent {
         <FormComponent>
           <form onSubmit={this.handleSubmit}>
             <Spacer direction="horizontal">
-              <Title title="Sign In" />
+              <Title title="Sign In" color="#fff" />
             </Spacer>
             <Spacer>
               <TextField type="text" placeholder="Enter Login..." name="email" onChange={this.handleChange} />

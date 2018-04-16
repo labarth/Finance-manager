@@ -23,7 +23,7 @@ class MainPage extends Component {
     const { user } = this.props;
     return (
       <div>
-        <Title title="Main Page" />
+        <Title title="Main Page" color="Black" />
         <p>
           {`hello ${user.email}`}
         </p>
