@@ -34,7 +34,8 @@ class MainPage extends Component {
         <Link to="/signin">
           <Button
             text="SignOut"
-            onClick={this.handleSignOut} />
+            onClick={this.handleSignOut}
+          />
         </Link>
       </div>
     );
