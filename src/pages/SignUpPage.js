@@ -114,22 +114,43 @@ class SignUpPage extends PureComponent {
         <FormComponent>
           <form onSubmit={this.handleSubmit}>
             <Spacer direction="horizontal">
-              <Title title="Sign Up" color="#fff" />
+              <Title
+                title="Sign Up"
+                color="#fff"
+              />
             </Spacer>
             <Spacer>
-              <TextField type="text" placeholder="Enter Login..." name="email" onChange={this.handleChange} autoFocus />
+              <TextField
+                type="text"
+                placeholder="Enter Login..."
+                name="email"
+                onChange={this.handleChange}
+                autoFocus
+              />
             </Spacer>
             <Spacer>
-              <TextField type="password" placeholder="Enter password..." name="password" onChange={this.handleChange} />
+              <TextField
+                type="password"
+                placeholder="Enter password..."
+                name="password"
+                onChange={this.handleChange}
+              />
             </Spacer>
             <Spacer>
-              <Button text="Sing Up" disabled={!canSubmitForm || loading} />
+              <Button
+                text="Sing Up"
+                disabled={!canSubmitForm || loading}
+              />
             </Spacer>
           </form>
         </FormComponent>
         {loading ? <CircularLoader /> : null}
         { isModalOpen ?
-          <Modal onCloseModal={this.handleCloseModal}>{error.message}</Modal>
+          <Modal
+            onCloseModal={this.handleCloseModal}
+          >
+            {error.message}
+          </Modal>
           : null
         }
       </WrapperComponent>

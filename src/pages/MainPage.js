@@ -24,12 +24,17 @@ class MainPage extends Component {
 
     return (
       <div>
-        <Title title="Main Page" color="Black" />
+        <Title
+          title="Main Page"
+          color="Black"
+        />
         <p>
           {user ? `Hello ${user.email}` : 'Hello ....'}
         </p>
         <Link to="/signin">
-          <Button text="SignOut" onClick={this.handleSignOut} />
+          <Button
+            text="SignOut"
+            onClick={this.handleSignOut} />
         </Link>
       </div>
     );

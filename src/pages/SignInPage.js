@@ -95,20 +95,40 @@ class SignInPage extends PureComponent {
         <FormComponent>
           <form onSubmit={this.handleSubmit}>
             <Spacer direction="horizontal">
-              <Title title="Sign In" color="#fff" />
+              <Title
+                title="Sign In"
+                color="#fff"
+              />
             </Spacer>
             <Spacer>
-              <TextField type="text" placeholder="Enter Login..." name="email" onChange={this.handleChange} autoFocus />
+              <TextField
+                type="text"
+                placeholder="Enter Login..."
+                name="email"
+                onChange={this.handleChange}
+                autoFocus
+              />
             </Spacer>
             <Spacer>
-              <TextField type="password" placeholder="Enter password..." name="password" onChange={this.handleChange} />
+              <TextField
+                type="password"
+                placeholder="Enter password..."
+                name="password"
+                onChange={this.handleChange}
+              />
             </Spacer>
             <Spacer>
-              <Button text="Sing In" disabled={loading} />
+              <Button
+                text="Sing In"
+                disabled={loading}
+              />
             </Spacer>
           </form>
           <Spacer>
-            <Button text="Sign In With Google" onClick={this.handleSingInWithGoogle} />
+            <Button
+              text="Sign In With Google"
+              onClick={this.handleSingInWithGoogle}
+            />
           </Spacer>
           <Spacer>
             <Link to="/signUp">
@@ -118,7 +138,11 @@ class SignInPage extends PureComponent {
         </FormComponent>
         { loading ? <CircularLoader /> : null }
         { isModalOpen ?
-          <Modal onCloseModal={this.handleCloseModal}>{error.message}</Modal>
+          <Modal
+            onCloseModal={this.handleCloseModal}
+          >
+            {error.message}
+          </Modal>
           : null
         }
       </WrapperComponent>
