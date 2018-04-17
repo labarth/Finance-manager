@@ -18,6 +18,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   SING_REQUEST: () => dispatch(authActions.SING_REQUEST()),
   SING_IN_SUCCESS: data => dispatch(authActions.SING_IN_SUCCESS(data)),
+  SING_ERROR: () => dispatch(authActions.SING_ERROR()),
 });
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -29,17 +30,19 @@ class App extends Component {
     user: PropTypes.shape({}),
     SING_REQUEST: PropTypes.func,
     SING_IN_SUCCESS: PropTypes.func,
+    SING_ERROR: PropTypes.func,
   }
 
   static defaultProps = {
     user: {},
     SING_REQUEST: Function.prototype,
     SING_IN_SUCCESS: Function.prototype,
+    SING_ERROR: Function.prototype,
   }
 
 
   componentDidMount() {
-    const { SING_REQUEST, SING_IN_SUCCESS, history } = this.props;
+    const { SING_REQUEST, SING_IN_SUCCESS, SING_ERROR, history } = this.props;
     SING_REQUEST();
 
     firebase.auth().onAuthStateChanged((user) => {
@@ -47,6 +50,7 @@ class App extends Component {
         SING_IN_SUCCESS(user);
         history.push('/home');
       } else {
+        SING_ERROR();
         history.push('/signin');
       }
     });
