@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -18,10 +19,10 @@ const ModalWrapper = styled.div`
 const ModalComponent = styled.div`
   position: absolute;
   min-width: 420px;
-  min-height: 120px;
+  max-width: 560px;
   background-color: #fff;
   box-shadow: 0 4px 14px rgba(0,0,0, 0.2);
-  padding: 20px;
+  padding: 30px;
   border-radius: 4px;
 `;
 
@@ -63,41 +64,47 @@ const CloseComponent = styled.div`
   }
 `;
 
+const ModalTextComponent = styled.p`
+  margin-top: 10px;
+`;
+
 class Modal extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
-    active: PropTypes.bool,
+    onCloseModal: PropTypes.func,
   };
 
   static defaultProps = {
-    active: false,
+    onCloseModal: Function.prototype,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      active: props.active,
-    };
+  componentDidMount() {
+    window.addEventListener('mousedown', this.handleDocumentClick);
   }
 
-  handleClose = () => {
-    console.log('handleClose');
-    this.setState({ active: false });
+  componentWillUnmount() {
+    window.removeEventListener('mousedown', this.handleDocumentClick);
+  }
+
+  handleDocumentClick = (e) => {
+    if (!this.modal.contains(e.target)) {
+      this.props.onCloseModal();
+    }
   }
 
   render() {
-    const { active } = this.state;
+    const { onCloseModal } = this.props;
 
     return (
-      active ?
+      ReactDOM.createPortal(
         <ModalWrapper>
-          <ModalComponent>
-            <CloseComponent onClick={this.handleClose} />
-            {this.props.children}
+          <ModalComponent innerRef={(modal) => { this.modal = modal; }}>
+            <CloseComponent onClick={onCloseModal} />
+            <ModalTextComponent>{this.props.children}</ModalTextComponent>
           </ModalComponent>
-        </ModalWrapper>
-        : null
+        </ModalWrapper>,
+        document.body,
+      )
     );
   }
 }

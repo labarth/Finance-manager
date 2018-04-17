@@ -6,6 +6,7 @@ import { Record } from 'immutable';
 import * as EmailValidator from 'email-validator';
 import styled from 'styled-components';
 import TextField from 'components/TextField';
+import Modal from 'components/Modal';
 import Button from 'components/Button';
 import Spacer from 'components/Spacer';
 import Title from 'components/Title';
@@ -32,7 +33,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  AuthWithEmail: state.AuthWithEmail,
+  auth: state.auth,
 });
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -41,17 +42,18 @@ class SignUpPage extends PureComponent {
     SING_REQUEST: PropTypes.func,
     SING_UP_SUCCESS: PropTypes.func,
     SING_ERROR: PropTypes.func,
-    AuthWithEmail: PropTypes.instanceOf(Record),
+    auth: PropTypes.instanceOf(Record),
   }
 
   static defaultProps = {
     SING_REQUEST: Function.prototype,
     SING_UP_SUCCESS: Function.prototype,
     SING_ERROR: Function.prototype,
-    AuthWithEmail: {},
+    auth: {},
   }
 
   state = {
+    isModalOpen: false,
     validEmail: false,
     validPassword: false,
     password: '',
@@ -71,6 +73,7 @@ class SignUpPage extends PureComponent {
       })
       .catch((error) => {
         SING_ERROR(error);
+        this.handleOpenModal();
       });
   }
 
@@ -98,9 +101,12 @@ class SignUpPage extends PureComponent {
     });
   }
 
+  handleOpenModal = () => this.setState({ isModalOpen: true });
+  handleCloseModal = () => this.setState({ isModalOpen: false });
+
   render() {
-    const { validEmail, validPassword } = this.state;
-    const { AuthWithEmail: { loading } } = this.props;
+    const { validEmail, validPassword, isModalOpen } = this.state;
+    const { auth: { loading, error } } = this.props;
     const canSubmitForm = validEmail && validPassword;
 
     return (
@@ -122,6 +128,10 @@ class SignUpPage extends PureComponent {
           </form>
         </FormComponent>
         {loading ? <CircularLoader /> : null}
+        { isModalOpen ?
+          <Modal onCloseModal={this.handleCloseModal}>{error.message}</Modal>
+          : null
+        }
       </WrapperComponent>
     );
   }

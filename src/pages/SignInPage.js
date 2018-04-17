@@ -56,6 +56,7 @@ class SignInPage extends PureComponent {
   state = {
     password: '',
     email: '',
+    isModalOpen: false,
   }
 
   handleSubmit = (e) => {
@@ -71,6 +72,7 @@ class SignInPage extends PureComponent {
       })
       .catch((error) => {
         SING_ERROR(error);
+        this.handleOpenModal();
       });
   }
 
@@ -81,8 +83,12 @@ class SignInPage extends PureComponent {
 
   handleSingInWithGoogle = () => signInWithGoogle();
 
+  handleOpenModal = () => this.setState({ isModalOpen: true });
+  handleCloseModal = () => this.setState({ isModalOpen: false });
+
   render() {
     const { auth: { loading, error } } = this.props;
+    const { isModalOpen } = this.state;
 
     return (
       <WrapperComponent>
@@ -111,7 +117,10 @@ class SignInPage extends PureComponent {
           </Spacer>
         </FormComponent>
         { loading ? <CircularLoader /> : null }
-        { error ? <Modal active>{error.message}</Modal> : null }
+        { isModalOpen ?
+          <Modal onCloseModal={this.handleCloseModal}>{error.message}</Modal>
+          : null
+        }
       </WrapperComponent>
     );
   }
