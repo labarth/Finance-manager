@@ -29,5 +29,5 @@ export const auth = handleActions({
   [authActions.SING_REQUEST]: signUpRequestReducer,
   [authActions.SING_UP_SUCCESS]: signUpSuccessReducer,
   [authActions.SING_ERROR]: signUpErrorReducer,
-  [authActions.SIGN_IN_SUCCESS]: signInSuccessReducer,
+  [authActions.SING_IN_SUCCESS]: signInSuccessReducer,
 }, initialState);

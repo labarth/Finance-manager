@@ -29,7 +29,7 @@ const FormComponent = styled.div`
 
 const mapDispatchToProps = dispatch => ({
   SING_REQUEST: () => dispatch(authActions.SING_REQUEST()),
-  SING_IN_SUCCESS: data => dispatch(authActions.SING_UP_SUCCESS(data)),
+  SING_IN_SUCCESS: data => dispatch(authActions.SING_IN_SUCCESS(data)),
   SING_ERROR: data => dispatch(authActions.SING_ERROR(data)),
 });
 

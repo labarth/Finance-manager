@@ -21,11 +21,12 @@ class MainPage extends Component {
 
   render() {
     const { user } = this.props;
+
     return (
       <div>
         <Title title="Main Page" color="Black" />
         <p>
-          {`hello ${user.email}`}
+          {user ? `Hello ${user.email}` : 'Hello ....'}
         </p>
         <Link to="/signin">
           <Button text="SignOut" onClick={this.handleSignOut} />
