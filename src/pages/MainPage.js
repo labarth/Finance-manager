@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, {Component, Fragment} from 'react'
 import { Link } from 'react-router-dom';
 import Layout from 'components/Layout';
 import Button from 'components/Button';
@@ -27,26 +27,21 @@ class MainPage extends Component {
     const { user } = this.props;
 
     return (
-      <Layout>
-        <SideBar>
-          SIDEBAR
-        </SideBar>
-        <LayoutContent>
-          <Title
-            title="Main Page"
-            color="Black"
+      <Fragment>
+        <Title
+          title="Main Page"
+          color="Black"
+        />
+        <p>
+          {user ? `Hello ${user.email}` : 'Hello ....'}
+        </p>
+        <Link to="/signin">
+          <Button
+            text="SignOut"
+            onClick={this.handleSignOut}
           />
-          <p>
-            {user ? `Hello ${user.email}` : 'Hello ....'}
-          </p>
-          <Link to="/signin">
-            <Button
-              text="SignOut"
-              onClick={this.handleSignOut}
-            />
-          </Link>
-        </LayoutContent>
-      </Layout>
+        </Link>
+      </Fragment>
     );
   }
 }

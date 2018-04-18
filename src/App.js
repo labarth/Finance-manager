@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import firebase from 'firebase';
 import { Route, withRouter } from 'react-router-dom';
+import { authActions } from 'redux/actions/authActions';
 import { connect } from 'react-redux';
 import Page from 'components/Page';
-import MainPage from 'pages/MainPage';
 import SignUpPage from 'pages/SignUpPage';
 import SignInPage from 'pages/SignInPage';
+import RootPage from 'pages/RootPage';
 import 'configFirebase';
 import 'components/injectGlobalStyledComponent';
-import { authActions } from 'redux/actions/authActions';
+
 
 const mapStateToProps = state => ({
   user: state.auth.user,
@@ -40,7 +41,6 @@ class App extends Component {
     SING_ERROR: Function.prototype,
   }
 
-
   componentDidMount() {
     const { SING_REQUEST, SING_IN_SUCCESS, SING_ERROR, history } = this.props;
     SING_REQUEST();
@@ -59,7 +59,7 @@ class App extends Component {
   render() {
     return (
       <Page>
-        <Route path="/home" render={() => <MainPage user={this.props.user} />} />
+        <Route path="/home" render={() => <RootPage user={this.props.user} />} />
         <Route path="/signup" component={SignUpPage} />
         <Route path="/signin" component={SignInPage} />
       </Page>
