@@ -29,9 +29,9 @@ class RootPage extends Component {
           </Link>
         </SideBar>
         <LayoutContent>
+          <Route path="/" component={AddExpensePage} />
           <MainPage user={this.props.user} />
           <Route path="/main" render={() => <MainPage user={this.props.user} />} />
-          <Route path="/add" component={AddExpensePage} />
         </LayoutContent>
       </Layout>
     );

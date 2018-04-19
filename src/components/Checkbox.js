@@ -36,7 +36,7 @@ const ComponentCheckbox = styled.input`
 
 class Checkbox extends PureComponent {
   static propTypes = {
-    onChange: PropTypes.func.isRequired,
+    onChange: PropTypes.func,
     name: PropTypes.string.isRequired,
     refs: PropTypes.func,
     defaultChecked: PropTypes.bool,
@@ -45,12 +45,13 @@ class Checkbox extends PureComponent {
   static defaultProps = {
     defaultChecked: false,
     refs: Function.prototype,
+    onChange: Function.prototype,
   };
 
   render() {
     const { onChange, defaultChecked, name, refs } = this.props;
     return (
-      <div>
+      <div style={{ display: 'inline-block' }}>
         <ComponentCheckbox
           type="checkbox"
           id="checkbox"
