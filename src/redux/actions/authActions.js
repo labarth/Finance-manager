@@ -9,9 +9,17 @@ export const authActions = {
   SING_UP_SUCCESS: createAction(`${appId}/${moduleName}/SING_UP_SUCCESS`),
   SING_ERROR: createAction(`${appId}/${moduleName}/SING_ERROR`),
   SING_IN_SUCCESS: createAction(`${appId}/${moduleName}/SING_IN_SUCCESS`),
+  SING_OUT_SUCCESS: createAction(`${appId}/${moduleName}/SING_OUT_SUCCESS`),
 };
 
-const { SING_REQUEST, SING_UP_SUCCESS, SING_ERROR, SING_IN_SUCCESS } = authActions;
+const {
+  SING_REQUEST,
+  SING_UP_SUCCESS,
+  SING_ERROR,
+  SING_IN_SUCCESS,
+  SING_OUT_SUCCESS,
+} = authActions;
+
 const provider = new firebase.auth.GoogleAuthProvider();
 
 export const signUp = (email, password) => (dispatch) => {
@@ -58,7 +66,7 @@ export const signOut = () => (dispatch) => {
 
   return firebase.auth().signOut()
     .then(() => {
-      dispatch(SING_IN_SUCCESS(null));
+      dispatch(SING_OUT_SUCCESS());
     }).catch((error) => {
       dispatch(SING_ERROR(error));
     });

@@ -28,14 +28,12 @@ class AddExpensePage extends Component {
 
   static defaultProps = {};
 
-  componentWillMount() {
+  componentDidMount() {
     this.setState({
       select: this.select.value,
       isExpanse: this.checkbox.checked,
     });
-  }
 
-  componentDidMount() {
     const userRef = database.ref().child('items');
     userRef.on('value', (snapshot) => {
       snapshot.forEach((item) => {
