@@ -23,7 +23,7 @@ export const signUp = (email, password) => (dispatch) => {
     })
     .catch((error) => {
       dispatch(SING_ERROR(error));
-      //this.handleOpenModal();
+      // this.handleOpenModal();
     });
 };
 
@@ -36,7 +36,7 @@ export const signIn = (email, password) => (dispatch) => {
     })
     .catch((error) => {
       dispatch(SING_ERROR(error));
-      //this.handleOpenModal();
+      // this.handleOpenModal();
     });
 };
 

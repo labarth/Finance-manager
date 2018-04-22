@@ -36,7 +36,7 @@ class AddExpensePage extends Component {
     const userRef = database.ref().child('items');
     userRef.on('value', (snapshot) => {
       const snapshots = JSON.stringify(snapshot);
-      snapshot.forEach(item => {
+      snapshot.forEach((item) => {
         const lala = JSON.parse(JSON.stringify(item));
         console.log(new Date(lala.date));
       });

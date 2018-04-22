@@ -11,7 +11,7 @@ import Title from 'components/Title';
 import Modal from 'components/Modal';
 import CircularLoader from 'components/CircularLoader';
 import { signInWithGoogle } from 'redux/actions/authActions';
-import { signIn } from 'redux/actions/authActions'
+import { signIn } from 'redux/actions/authActions';
 
 const WrapperComponent = styled.section`
   display: flex;
