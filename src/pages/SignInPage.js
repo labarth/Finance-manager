@@ -124,7 +124,7 @@ class SignInPage extends PureComponent {
           <Modal
             onCloseModal={this.handleCloseModal}
           >
-            {error.message}
+            {error.message ? error.message : 'unknow error'}
           </Modal>
           : null
         }

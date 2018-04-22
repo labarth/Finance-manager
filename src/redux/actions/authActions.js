@@ -76,7 +76,7 @@ export const authChanged = history => (dispatch) => {
   return firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       dispatch(SING_IN_SUCCESS(user));
-      history.push('/home');
+      history.push('/home/main');
     } else {
       history.push('/signin');
     }
