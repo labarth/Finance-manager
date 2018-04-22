@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link, Route, withRouter } from 'react-router-dom';
+import { NavLink, Route, withRouter } from 'react-router-dom';
 import Layout from 'components/Layout';
 import LayoutContent from 'components/LayoutContent';
 import SideBar from 'components/SideBar';
@@ -21,16 +21,16 @@ class RootPage extends Component {
     return (
       <Layout>
         <SideBar>
-          <Link to="/main">
+          <NavLink to="/home/main">
             Main Page
-          </Link>
-          <Link to="/home/add">
+          </NavLink>
+          <NavLink to="/home/add">
             Add Expense Page
-          </Link>
+          </NavLink>
         </SideBar>
         <LayoutContent>
           <Route exact path="/home/add" component={AddExpensePage} />
-          <Route path="/main" render={() => <MainPage user={this.props.user} />} />
+          <Route path="/home/main" render={() => <MainPage user={this.props.user} />} />
         </LayoutContent>
       </Layout>
     );
