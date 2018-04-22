@@ -35,7 +35,11 @@ class AddExpensePage extends Component {
     });
     const userRef = database.ref().child('items');
     userRef.on('value', (snapshot) => {
-      console.log(JSON.stringify(snapshot));
+      const snapshots = JSON.stringify(snapshot);
+      snapshot.forEach(item => {
+        const lala = JSON.parse(JSON.stringify(item));
+        console.log(new Date(lala.date));
+      });
     });
   }
 
@@ -54,12 +58,14 @@ class AddExpensePage extends Component {
 
     const { select, isExpanse, price, description } = this.state;
     const id = v4();
+    const date = new Date().toString();
     firebase.database().ref(`items/${id}`).set({
       id,
       select,
       isExpanse,
       price,
       description,
+      date,
     });
   }
 

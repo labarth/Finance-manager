@@ -24,13 +24,12 @@ class RootPage extends Component {
           <Link to="/main">
             Main Page
           </Link>
-          <Link to="/add">
+          <Link to="/home/add">
             Add Expense Page
           </Link>
         </SideBar>
         <LayoutContent>
-          <Route path="/" component={AddExpensePage} />
-          <MainPage user={this.props.user} />
+          <Route exact path="/home/add" component={AddExpensePage} />
           <Route path="/main" render={() => <MainPage user={this.props.user} />} />
         </LayoutContent>
       </Layout>
