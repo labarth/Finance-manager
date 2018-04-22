@@ -48,9 +48,9 @@ class SignInPage extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    // if ((this.props.auth.error !== nextProps.auth.error) && !this.state.isModalOpen) {
-    //   this.handleOpenModal();
-    // }
+    if (nextProps.auth.error && !this.state.isModalOpen) {
+      this.handleOpenModal();
+    }
   }
 
   handleSubmit = (e) => {

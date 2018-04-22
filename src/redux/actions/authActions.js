@@ -42,7 +42,6 @@ export const signIn = (email, password) => (dispatch) => {
       dispatch(SING_IN_SUCCESS(user));
     })
     .catch((error) => {
-      console.log(error, 'errrorws');
       dispatch(SING_ERROR(error));
     });
 };
