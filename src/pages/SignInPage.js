@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Record } from 'immutable';
+import { signIn, signInWithGoogle } from 'redux/actions/authActions';
 import styled from 'styled-components';
 import TextField from 'components/TextField';
 import Button from 'components/Button';
@@ -10,8 +11,6 @@ import Spacer from 'components/Spacer';
 import Title from 'components/Title';
 import Modal from 'components/Modal';
 import CircularLoader from 'components/CircularLoader';
-import { signInWithGoogle } from 'redux/actions/authActions';
-import { signIn } from 'redux/actions/authActions';
 
 const WrapperComponent = styled.section`
   display: flex;
