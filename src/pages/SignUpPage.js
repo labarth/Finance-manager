@@ -48,6 +48,12 @@ class SignUpPage extends PureComponent {
     email: '',
   }
 
+  // componentWillReceiveProps(nextProps) {
+  //   if ((this.props.auth.error !== nextProps.auth.error) && !this.state.isModalOpen) {
+  //     this.handleOpenModal();
+  //   }
+  // }
+
   handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = this.state;

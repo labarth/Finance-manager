@@ -10,29 +10,36 @@ const AuthSchema = Record({
 
 const initialState = new AuthSchema();
 
-const signUpRequestReducer = (state = initialState) => state.set('loading', true);
-
 const signUpSuccessReducer = (state = initialState, { payload }) => state
   .set('loading', false)
   .set('user', payload)
   .set('error', null);
 
-const signUpErrorReducer = (state = initialState, { payload }) => state
-  .set('loading', false)
-  .set('error', payload);
-
 const signInSuccessReducer = (state = initialState, { payload }) => state
   .set('loading', false)
-  .set('user', payload);
+  .set('user', payload)
+  .set('error', null);
 
 const signOutSuccessReducer = (state = initialState) => state
   .set('loading', false)
-  .set('user', null);
+  .set('user', null)
+  .set('error', null);
+
+const signRequestReducer = (state = initialState) => state
+  .set('loading', true)
+  .set('user', null)
+  .set('error', null);
+
+const signErrorReducer = (state = initialState, { payload }) => state
+  .set('loading', false)
+  .set('user', null)
+  .set('error', payload);
+
 
 export const auth = handleActions({
-  [authActions.SING_REQUEST]: signUpRequestReducer,
+  [authActions.SING_REQUEST]: signRequestReducer,
+  [authActions.SING_ERROR]: signErrorReducer,
   [authActions.SING_UP_SUCCESS]: signUpSuccessReducer,
-  [authActions.SING_ERROR]: signUpErrorReducer,
   [authActions.SING_IN_SUCCESS]: signInSuccessReducer,
   [authActions.SING_OUT_SUCCESS]: signOutSuccessReducer,
 }, initialState);

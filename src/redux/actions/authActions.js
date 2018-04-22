@@ -31,7 +31,6 @@ export const signUp = (email, password) => (dispatch) => {
     })
     .catch((error) => {
       dispatch(SING_ERROR(error));
-      // this.handleOpenModal();
     });
 };
 
@@ -43,8 +42,8 @@ export const signIn = (email, password) => (dispatch) => {
       dispatch(SING_IN_SUCCESS(user));
     })
     .catch((error) => {
+      console.log(error, 'errrorws');
       dispatch(SING_ERROR(error));
-      // this.handleOpenModal();
     });
 };
 
@@ -72,3 +71,15 @@ export const signOut = () => (dispatch) => {
     });
 };
 
+export const authChanged = history => (dispatch) => {
+  dispatch(SING_REQUEST);
+
+  return firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      dispatch(SING_IN_SUCCESS(user));
+      history.push('/home');
+    } else {
+      history.push('/signin');
+    }
+  });
+};
