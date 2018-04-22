@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react'
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Layout from 'components/Layout';
 import Button from 'components/Button';
@@ -7,9 +8,9 @@ import Title from 'components/Title';
 import Page from 'components/Page'
 import SideBar from 'components/SideBar'
 import LayoutContent from 'components/LayoutContent'
-import { signOutWithGoogle } from 'redux/reducer/reducers/authWithGoogle';
+import { signOut } from 'redux/actions/authActions';
 
-
+@connect(null, { signOut })
 class MainPage extends Component {
   static propTypes = {
     user: PropTypes.shape({}),
@@ -19,9 +20,7 @@ class MainPage extends Component {
     user: {},
   }
 
-  handleSignOut = () => {
-    signOutWithGoogle();
-  }
+  handleSignOut = () =>  this.props.signOut();
 
   render() {
     const { user } = this.props;

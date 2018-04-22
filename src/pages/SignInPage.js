@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Record } from 'immutable';
@@ -11,8 +10,8 @@ import Spacer from 'components/Spacer';
 import Title from 'components/Title';
 import Modal from 'components/Modal';
 import CircularLoader from 'components/CircularLoader';
-import { signInWithGoogle } from 'redux/reducer/reducers/authWithGoogle';
-import { authActions } from 'redux/actions/authActions';
+import { signInWithGoogle } from 'redux/actions/authActions';
+import { signIn } from 'redux/actions/authActions'
 
 const WrapperComponent = styled.section`
   display: flex;
@@ -27,29 +26,19 @@ const FormComponent = styled.div`
   width: 360px;
 `;
 
-const mapDispatchToProps = dispatch => ({
-  SING_REQUEST: () => dispatch(authActions.SING_REQUEST()),
-  SING_IN_SUCCESS: data => dispatch(authActions.SING_IN_SUCCESS(data)),
-  SING_ERROR: data => dispatch(authActions.SING_ERROR(data)),
-});
-
 const mapStateToProps = state => ({
   auth: state.auth,
 });
 
-@connect(mapStateToProps, mapDispatchToProps)
+@connect(mapStateToProps, { signIn, signInWithGoogle })
 class SignInPage extends PureComponent {
   static propTypes = {
-    SING_REQUEST: PropTypes.func,
-    SING_IN_SUCCESS: PropTypes.func,
-    SING_ERROR: PropTypes.func,
     auth: PropTypes.instanceOf(Record),
+    signIn: PropTypes.func.isRequired,
+    signInWithGoogle: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
-    SING_REQUEST: Function.prototype,
-    SING_IN_SUCCESS: Function.prototype,
-    SING_ERROR: Function.prototype,
     auth: {},
   }
 
@@ -62,18 +51,7 @@ class SignInPage extends PureComponent {
   handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = this.state;
-    const { SING_REQUEST, SING_IN_SUCCESS, SING_ERROR } = this.props;
-
-    SING_REQUEST();
-
-    firebase.auth().signInWithEmailAndPassword(email, password)
-      .then((user) => {
-        SING_IN_SUCCESS(user);
-      })
-      .catch((error) => {
-        SING_ERROR(error);
-        this.handleOpenModal();
-      });
+    this.props.signIn(email, password);
   }
 
   handleChange = (e) => {
@@ -81,7 +59,7 @@ class SignInPage extends PureComponent {
     this.setState({ [name]: value });
   }
 
-  handleSingInWithGoogle = () => signInWithGoogle();
+  handleSingInWithGoogle = () => this.props.signInWithGoogle();
 
   handleOpenModal = () => this.setState({ isModalOpen: true });
   handleCloseModal = () => this.setState({ isModalOpen: false });
