@@ -9,6 +9,7 @@ const SideBarComponent = styled.aside`
   box-shadow: 1px 0 6px rgba(0,0,0,0.2);
   min-height: 100%;
   display: flex;
+  flex-direction: column;
 `;
 
 class SideBar extends PureComponent {

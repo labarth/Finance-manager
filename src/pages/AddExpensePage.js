@@ -33,14 +33,6 @@ class AddExpensePage extends Component {
       select: this.select.value,
       isExpanse: this.checkbox.checked,
     });
-
-    const userRef = database.ref().child('items');
-    userRef.on('value', (snapshot) => {
-      snapshot.forEach((item) => {
-        const lala = JSON.parse(JSON.stringify(item));
-        console.log(new Date(lala.date));
-      });
-    });
   }
 
   handleChange = (e) => {
