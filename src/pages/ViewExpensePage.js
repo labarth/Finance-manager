@@ -24,9 +24,10 @@ class ViewExpensePage extends PureComponent {
     db: Record(),
   };
 
-  componentDidMount() {
-    if (this.props.user) {
-      this.props.getItems(this.props.user.uid);
+  componentWillReceiveProps() {
+    const { user, getItems } = this.props;
+    if (user) {
+      getItems(user.uid);
     }
   }
 
