@@ -10,11 +10,10 @@ export const dbActions = {
 
 
 export const getItems = id => (dispatch) => {
-  const items = [];
-
   dispatch(dbActions.GET_DB_ITEMS_REQUEST);
   const starCountRef = database.ref(`items/${id}`);
   return starCountRef.on('value', (snapshot) => {
+    const items = [];
     snapshot.forEach((item) => {
       items.push(item.val());
     });

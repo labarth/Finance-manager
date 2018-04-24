@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { getItems } from 'redux/actions/dbActions';
 
 const mapStateToProps = state => ({
-  user: state.auth.user,
   db: state.db,
 });
 

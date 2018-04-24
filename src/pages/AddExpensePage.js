@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import v4 from 'uuid';
 import { List, Map } from 'immutable';
-import { connect } from 'react-redux';
 import Spacer from 'components/Spacer';
 import TextField from 'components/TextField';
 import Button from 'components/Button';
@@ -24,11 +23,6 @@ const WrapperComponent = styled.section`
   text-align: center;
 `;
 
-const mapStateToProps = state => ({
-  user: state.auth.user,
-});
-
-@connect(mapStateToProps, null)
 class AddExpensePage extends Component {
   static propTypes = {
     user: PropTypes.shape({
