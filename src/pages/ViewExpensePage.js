@@ -8,26 +8,26 @@ const mapStateToProps = state => ({
   db: state.db,
 });
 
-@connect(mapStateToProps, { getItems })
+@connect(mapStateToProps, { getItemsAction: getItems })
 class ViewExpensePage extends PureComponent {
   static propTypes = {
     user: PropTypes.shape({
       uid: PropTypes.string,
     }),
-    getItems: PropTypes.func,
+    getItemsAction: PropTypes.func,
     db: PropTypes.instanceOf(Record),
   };
 
   static defaultProps = {
     user: {},
-    getItems: Function.prototype,
+    getItemsAction: Function.prototype,
     db: Record(),
   };
 
   componentWillReceiveProps() {
-    const { user, getItems } = this.props;
+    const { user, getItemsAction } = this.props;
     if (user) {
-      getItems(user.uid);
+      getItemsAction(user.uid);
     }
   }
 

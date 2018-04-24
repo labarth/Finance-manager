@@ -11,6 +11,8 @@ module.exports = {
     "import/extensions": ["error", "never", { "packages": "always" }],
     "import/no-unresolved": "off",
     "import/prefer-default-export": "off",
+    "react/no-did-mount-set-state": [0],
+    "no-shadow": [2, {"builtinGlobals": false, "hoist": "functions", "allow": []}],
     "object-curly-newline": [0, {
       "ObjectExpression": "always",
     }],
