@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import Button from 'components/Button';
 import Title from 'components/Title';
 import { signOut } from 'redux/actions/authActions';
+import ViewExpense from '../components/ViewExpanse'
+import CircularLoader from '../components/CircularLoader'
 
 @connect(null, { signOut })
 class MainPage extends Component {
@@ -28,6 +30,7 @@ class MainPage extends Component {
           title="Main Page"
           color="Black"
         />
+        {user ? <ViewExpense user={user} /> : <CircularLoader/> }
         <p>
           {user ? `Hello ${user.email}` : 'Hello ....'}
         </p>

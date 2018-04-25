@@ -6,7 +6,6 @@ import LayoutContent from 'components/LayoutContent';
 import SideBar from 'components/SideBar';
 import MainPage from 'pages/MainPage';
 import AddExpensePage from 'pages/AddExpensePage';
-import ViewExpensePage from './ViewExpensePage';
 
 
 class RootPage extends Component {
@@ -19,6 +18,8 @@ class RootPage extends Component {
   }
 
   render() {
+    const { user } = this.props;
+
     return (
       <Layout>
         <SideBar>
@@ -32,16 +33,10 @@ class RootPage extends Component {
               Add Expense Page
             </NavLink>
           </div>
-          <div>
-            <NavLink to="/home/view">
-              View Expense Page
-            </NavLink>
-          </div>
         </SideBar>
         <LayoutContent>
-          <Route exact path="/home/add" component={() => <AddExpensePage user={this.props.user} />} />
-          <Route path="/home/main" render={() => <MainPage user={this.props.user} />} />
-          <Route path="/home/view" component={() => <ViewExpensePage user={this.props.user} />} />
+          <Route path="/home/main" render={() => <MainPage user={user} />} />
+          <Route exact path="/home/add" component={() => <AddExpensePage user={user} />} />
         </LayoutContent>
       </Layout>
     );
