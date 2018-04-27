@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Immutable from 'immutable';
 import v4 from 'uuid';
-import { List, Map } from 'immutable';
+import { connect } from 'react-redux';
 import Spacer from 'components/Spacer';
 import TextField from 'components/TextField';
 import Button from 'components/Button';
@@ -11,23 +12,23 @@ import Checkbox from 'components/Checkbox';
 import SelectField from 'components/SelectField';
 import { database } from 'configFirebase';
 
-const options = List([
-  Map({ label: 'Дом', value: v4() }),
-  Map({ label: 'Еда', value: v4() }),
-  Map({ label: 'Авто', value: v4() }),
-]);
-
 const WrapperComponent = styled.section`
   width: 420px;
   margin: 0 auto;
   text-align: center;
 `;
 
+const mapDispatchToProps = state => ({
+  options: state.categories,
+});
+
+@connect(mapDispatchToProps, null)
 class AddExpensePage extends Component {
   static propTypes = {
     user: PropTypes.shape({
       uid: PropTypes.string,
     }),
+    options: PropTypes.instanceOf(Immutable.List).isRequired,
   };
 
   static defaultProps = {
@@ -85,7 +86,7 @@ class AddExpensePage extends Component {
             </Spacer>
             <Spacer direction="vertical" size={20} indent={false}>
               <SelectField
-                options={options}
+                options={this.props.options}
                 onChange={this.handleChange}
                 name="category"
                 refs={(select) => { this.select = select; }}

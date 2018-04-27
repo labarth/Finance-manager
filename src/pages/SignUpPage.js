@@ -61,11 +61,7 @@ class SignUpPage extends PureComponent {
   }
 
   handleEmailValidate = () => {
-    EmailValidator.validate(this.state.email)
-      ?
-      this.setState({ validEmail: true })
-      :
-      this.setState({ validEmail: false });
+    this.setState({ validEmail: EmailValidator.validate(this.state.email) });
   }
 
   handlePasswordValidate = () => {
