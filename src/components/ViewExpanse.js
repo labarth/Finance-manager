@@ -43,8 +43,8 @@ class ViewExpense extends Component {
             <div>{item.price}</div>
             <div>{item.description}</div>
             <div>{`${item.isExpanse}`}</div>
-            <div>{item.select}</div>
-            <br/>
+            <div>{item.category}</div>
+            <br />
           </div>
         )) :
         <div>not items</div>

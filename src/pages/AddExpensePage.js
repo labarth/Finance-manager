@@ -36,7 +36,7 @@ class AddExpensePage extends Component {
 
   componentDidMount() {
     this.setState({
-      select: this.select.value,
+      category: this.select.value,
       isExpanse: this.checkbox.checked,
     });
   }
@@ -54,13 +54,13 @@ class AddExpensePage extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const { select, isExpanse, price, description } = this.state;
+    const { category, isExpanse, price, description } = this.state;
     const id = v4();
     const date = new Date().toString();
     const refDB = database.ref(`items/${this.props.user.uid}`);
     const data = {
       id,
-      select,
+      category,
       isExpanse,
       price,
       description,
@@ -87,7 +87,7 @@ class AddExpensePage extends Component {
               <SelectField
                 options={options}
                 onChange={this.handleChange}
-                name="select"
+                name="category"
                 refs={(select) => { this.select = select; }}
               />
             </Spacer>
