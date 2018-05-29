@@ -4,6 +4,7 @@ import { Record } from 'immutable';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getItems } from 'redux/actions/dbActions';
+import moment from 'moment';
 
 const mapStateToProps = state => ({
   db: state.db,
@@ -39,8 +40,8 @@ class ViewExpense extends Component {
       items ?
         items.map(item => (
           <div key={item.id}>
-            <div>{item.date}</div>
-            <div>{item.price}</div>
+            <div>{moment(item.date).format('DD.MM.YYYY')}</div>
+            <div>{`${item.price} BYN`}</div>
             <div>{item.description}</div>
             <div>{`${item.isExpanse}`}</div>
             <div>{item.category}</div>
