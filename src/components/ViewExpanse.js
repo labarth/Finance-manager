@@ -5,6 +5,22 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getItems } from 'redux/actions/dbActions';
 import moment from 'moment';
+import styled from 'styled-components';
+
+const ExpenseComponent = styled.div`
+  position: relative;
+  margin-bottom: 25px;
+  padding-left: 8px;
+`;
+
+const IsIncomeComponent = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background-color: ${props => (props.isIncome ? 'green' : 'red')};
+`;
 
 const mapStateToProps = state => ({
   db: state.db,
@@ -37,16 +53,15 @@ class ViewExpense extends Component {
     const { db: { items } } = this.props;
 
     return (
-      items ?
+      items.size ?
         items.map(item => (
-          <div key={item.id}>
+          <ExpenseComponent key={item.id}>
             <div>{moment(item.date).format('DD.MM.YYYY')}</div>
             <div>{`${item.price} BYN`}</div>
             <div>{item.description}</div>
-            <div>{`${item.isExpanse}`}</div>
+            <IsIncomeComponent isIncome={item.isIncome} />
             <div>{item.category}</div>
-            <br />
-          </div>
+          </ExpenseComponent>
         )) :
         <div>not items</div>
     );

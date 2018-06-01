@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Route, withRouter } from 'react-router-dom';
 import { authChanged } from 'redux/actions/authActions';
+import { getCategories } from 'redux/actions/dbActions';
 import { connect } from 'react-redux';
 import Page from 'components/Page';
 import SignUpPage from 'pages/SignUpPage';
@@ -14,7 +15,7 @@ const mapStateToProps = state => ({
   user: state.auth.user,
 });
 
-@connect(mapStateToProps, { authChanged })
+@connect(mapStateToProps, { authChanged, getCategories })
 class App extends Component {
   static propTypes = {
     history: PropTypes.shape({
@@ -28,15 +29,16 @@ class App extends Component {
     user: {},
   }
 
-  constructor(props) {
-    super(props);
+  componentDidMount() {
     this.props.authChanged(this.props.history);
   }
 
   render() {
+    const { user } = this.props;
+
     return (
       <Page>
-        <Route path="/home" render={() => <RootPage user={this.props.user} />} />
+        <Route path="/home" render={() => <RootPage user={user} />} />
         <Route path="/signup" component={SignUpPage} />
         <Route path="/signin" component={SignInPage} />
       </Page>

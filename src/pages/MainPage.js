@@ -22,7 +22,7 @@ class MainPage extends Component {
   handleSignOut = () => this.props.signOut();
 
   render() {
-    const { user } = this.props;
+    const { user, categories } = this.props;
 
     return (
       <Fragment>
@@ -30,7 +30,7 @@ class MainPage extends Component {
           title="Main Page"
           color="Black"
         />
-        {user ? <ViewExpense user={user} /> : <CircularLoader/> }
+        {user ? <ViewExpense user={user} categories={categories} /> : <CircularLoader/> }
         <p>
           {user ? `Hello ${user.email}` : 'Hello ....'}
         </p>
