@@ -11,6 +11,10 @@ import history from './history';
 
 const baseStyles = () => injectGlobal`
   ${styledNormalize}
+  
+  #root {
+    height: 100vh;
+  }
 `;
 
 const store = configureStore();

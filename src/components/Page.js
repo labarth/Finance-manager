@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const LayoutComponent = styled.section`
   box-shadow: 0 4px 14px rgba(0,0,0, 0.1);
   margin: 0 auto;
-  min-height: 100vh;
+  height: 100%;
 `;
 
 class Page extends PureComponent {
