@@ -20,7 +20,7 @@ class SelectField extends PureComponent {
   render() {
     const { options, value, refs, onChange, name } = this.props;
     const valueIndex = options.findIndex(option => option.get('value') === value);
-    console.log(options);
+
     return (
       <select
         defaultValue={options.getIn([valueIndex, 'value'])}
