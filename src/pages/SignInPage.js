@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Record } from 'immutable';
 import { signIn, signInWithGoogle } from 'redux/actions/authActions';
 import styled from 'styled-components';
@@ -35,6 +35,9 @@ class SignInPage extends PureComponent {
     auth: PropTypes.instanceOf(Record),
     signIn: PropTypes.func.isRequired,
     signInWithGoogle: PropTypes.func.isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func,
+    }).isRequired,
   }
 
   static defaultProps = {
@@ -55,8 +58,9 @@ class SignInPage extends PureComponent {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const { history } = this.props;
     const { email, password } = this.state;
-    this.props.signIn(email, password);
+    this.props.signIn(email, password, history);
   }
 
   handleChange = (e) => {
@@ -133,4 +137,4 @@ class SignInPage extends PureComponent {
   }
 }
 
-export default SignInPage;
+export default withRouter(SignInPage);

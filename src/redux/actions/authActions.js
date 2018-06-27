@@ -34,12 +34,13 @@ export const signUp = (email, password) => (dispatch) => {
     });
 };
 
-export const signIn = (email, password) => (dispatch) => {
+export const signIn = (email, password, history) => (dispatch) => {
   dispatch(SING_REQUEST());
 
   return firebase.auth().signInWithEmailAndPassword(email, password)
     .then((user) => {
       dispatch(SING_IN_SUCCESS(user));
+      history.push('/');
     })
     .catch((error) => {
       dispatch(SING_ERROR(error));
@@ -76,7 +77,6 @@ export const authChanged = history => (dispatch) => {
   return firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       dispatch(SING_IN_SUCCESS(user));
-      history.push('/home/main');
     } else {
       history.push('/signin');
     }

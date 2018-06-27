@@ -30,12 +30,13 @@ class AddExpensePage extends Component {
       uid: PropTypes.string,
     }),
     categories: PropTypes.instanceOf(List),
-    getCategories: PropTypes.func.isRequired,
+    getCategories: PropTypes.func,
   };
 
   static defaultProps = {
     user: {},
     categories: List(),
+    getCategories: Function.prototype,
   };
 
   componentDidMount() {

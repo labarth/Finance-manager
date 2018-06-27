@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 const SideBarComponent = styled.aside`
@@ -13,16 +13,19 @@ const SideBarComponent = styled.aside`
 `;
 
 class SideBar extends PureComponent {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-  };
-
-  static defaultProps = {};
-
   render() {
     return (
       <SideBarComponent>
-        {this.props.children}
+        <div>
+          <NavLink exact activeStyle={{ background: 'red' }} to="/">
+            Main Page
+          </NavLink>
+        </div>
+        <div>
+          <NavLink activeStyle={{ background: 'red' }} to="/add">
+            Add Expense Page
+          </NavLink>
+        </div>
       </SideBarComponent>
     );
   }
