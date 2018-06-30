@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { List } from 'immutable';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -8,13 +8,14 @@ import Title from 'components/Title';
 import { signOut } from 'redux/actions/authActions';
 import ViewExpense from '../components/ViewExpanse';
 import CircularLoader from '../components/CircularLoader';
+import LayoutContent from '../components/LayoutContent';
 
 @connect(null, { signOut })
 class MainPage extends Component {
   static propTypes = {
     user: PropTypes.shape({}),
     signOut: PropTypes.func.isRequired,
-    categories: PropTypes.instanceOf(List()),
+    categories: PropTypes.instanceOf(List),
   };
 
   static defaultProps = {
@@ -28,22 +29,14 @@ class MainPage extends Component {
     const { user, categories } = this.props;
 
     return (
-      <Fragment>
-        <Title
-          title="Main Page"
-          color="Black"
-        />
+      <LayoutContent>
+        <Title title="Main Page" color="Black" />
         {user ? <ViewExpense user={user} categories={categories} /> : <CircularLoader /> }
-        <p>
-          {user ? `Hello ${user.email}` : 'Hello ....'}
-        </p>
+        <p> {user ? `Hello ${user.email}` : 'Hello ....'} </p>
         <Link to="/signin">
-          <Button
-            text="SignOut"
-            onClick={this.handleSignOut}
-          />
+          <Button text="SignOut" onClick={this.handleSignOut} />
         </Link>
-      </Fragment>
+      </LayoutContent>
     );
   }
 }

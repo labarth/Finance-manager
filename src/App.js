@@ -12,6 +12,7 @@ import AddExpensePage from 'pages/AddExpensePage';
 import MainPage from 'pages/MainPage';
 import 'configFirebase';
 import 'components/injectGlobalStyledComponent';
+import Layout from './components/Layout';
 
 const mapStateToProps = state => ({
   user: state.auth.user,
@@ -40,15 +41,17 @@ class App extends Component {
 
     return (
       <Page>
-        <Route exact path="/" component={SideBar} />
-        <Route exact path="/add" component={SideBar} />
-        <Switch>
-          <Route exact path="/" render={props => <MainPage {...props} user={user} />} />
-          <Route exact path="/add" component={props => <AddExpensePage {...props} user={user} />} />
-          <Route path="/signup" component={SignUpPage} />
-          <Route path="/signin" component={SignInPage} />
-          <Route component={() => <div>not found</div>} />
-        </Switch>
+        <Layout>
+          <Route exact path="/" component={SideBar} />
+          <Route exact path="/add" component={SideBar} />
+          <Switch>
+            <Route exact path="/" render={props => <MainPage {...props} user={user} />} />
+            <Route exact path="/add" component={props => <AddExpensePage {...props} user={user} />} />
+            <Route path="/signup" component={SignUpPage} />
+            <Route path="/signin" component={SignInPage} />
+            <Route component={() => <div>not found</div>} />
+          </Switch>
+        </Layout>
       </Page>
     );
   }
