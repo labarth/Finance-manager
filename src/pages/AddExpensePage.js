@@ -39,6 +39,10 @@ class AddExpensePage extends Component {
     getCategories: Function.prototype,
   };
 
+  state = {
+    isInvalidCategory: false,
+  }
+
   componentDidMount() {
     this.setState({
       category: this.select.value,
@@ -52,6 +56,18 @@ class AddExpensePage extends Component {
 
   handleChange = (e) => {
     const { target: { value } } = e;
+    this.setState({
+      [e.target.name]: value,
+    });
+  }
+
+  handleAddCategoryChange = (e) => {
+    const { target: { value } } = e;
+    const { categories } = this.props;
+    if (categories.size) {
+      const isInvalidCategory = !!categories.find(category => category.get('label') === value);
+      this.setState({ isInvalidCategory });
+    }
     this.setState({ [e.target.name]: value });
   }
 
@@ -64,7 +80,7 @@ class AddExpensePage extends Component {
 
     const { categoryName } = this.state;
     const refDB = database.ref(`categories/${this.props.user.uid}`);
-    refDB.push(categoryName);
+    refDB.push({ label: categoryName, value: v4() });
   }
 
   handleSubmit = (e) => {
@@ -95,10 +111,10 @@ class AddExpensePage extends Component {
             <TextField
               type="text"
               placeholder="Enter category name..."
-              onChange={this.handleChange}
+              onChange={this.handleAddCategoryChange}
               name="categoryName"
             />
-            <Button text="Ok" />
+            <Button text="Ok" disabled={this.state.isInvalidCategory} />
           </form>
           <form onSubmit={this.handleSubmit}>
             <Spacer direction="vertical" size={20} indent={false}>

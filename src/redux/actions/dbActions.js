@@ -29,7 +29,7 @@ export const getCategories = id => (dispatch) => {
   return starCountRef.on('value', (snapshot) => {
     const items = [];
     snapshot.forEach((item) => {
-      items.push(Map({ label: item.val(), value: item.val() }));
+      items.push(Map({ label: item.val().label, value: item.val().value }));
     });
     dispatch(dbActions.GET_DB_CATEGORY_SUCCESS(List(items)));
   });
