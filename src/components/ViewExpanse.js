@@ -4,7 +4,6 @@ import { Record } from 'immutable';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getItems } from 'redux/actions/dbActions';
-import moment from 'moment';
 import styled from 'styled-components';
 
 const ExpenseComponent = styled.div`
@@ -56,7 +55,7 @@ class ViewExpense extends Component {
       items.size ?
         items.map(item => (
           <ExpenseComponent key={item.id}>
-            <div>{moment(item.date).format('DD.MM.YYYY')}</div>
+            <div>{new Date(item.date).toLocaleDateString()}</div>
             <div>{`${item.price} BYN`}</div>
             <div>{item.description}</div>
             <IsIncomeComponent isIncome={item.isIncome} />
