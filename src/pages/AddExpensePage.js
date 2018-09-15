@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import v4 from 'uuid';
 import Spacer from 'components/Spacer';
 import TextField from 'components/TextField';
-import Button from 'components/Button';
+import Button from 'components/Button/Button';
 import Title from 'components/Title';
 import Checkbox from 'components/Checkbox';
 import SelectField from 'components/SelectField';
@@ -19,7 +19,7 @@ const WrapperComponent = styled.section`
   text-align: center;
 `;
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   categories: state.db.categories,
 });
 
@@ -65,7 +65,7 @@ class AddExpensePage extends Component {
     const { target: { value } } = e;
     const { categories } = this.props;
     if (categories.size) {
-      const isInvalidCategory = !!categories.find(category => category.get('label') === value);
+      const isInvalidCategory = !!categories.find((category) => category.get('label') === value);
       this.setState({ isInvalidCategory });
     }
     this.setState({ [e.target.name]: value });

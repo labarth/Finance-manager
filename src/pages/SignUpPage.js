@@ -6,7 +6,7 @@ import * as EmailValidator from 'email-validator';
 import styled from 'styled-components';
 import TextField from 'components/TextField';
 import Modal from 'components/Modal';
-import Button from 'components/Button';
+import Button from 'components/Button/Button';
 import Spacer from 'components/Spacer';
 import Title from 'components/Title';
 import CircularLoader from 'components/CircularLoader';
@@ -26,7 +26,7 @@ const FormComponent = styled.div`
   width: 360px;
 `;
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 

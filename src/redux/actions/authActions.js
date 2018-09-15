@@ -71,7 +71,7 @@ export const signOut = () => (dispatch) => {
     });
 };
 
-export const authChanged = history => (dispatch) => {
+export const authChanged = (history) => (dispatch) => {
   dispatch(SING_REQUEST);
 
   return firebase.auth().onAuthStateChanged((user) => {

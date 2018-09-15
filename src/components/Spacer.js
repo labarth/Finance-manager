@@ -5,14 +5,14 @@ import styled from 'styled-components';
 const directionTypes = ['left', 'right', 'top', 'bottom', 'vertical', 'horizontal', 'all'];
 
 const SpacerComponent = styled.div`
-  padding-top:    ${props => (props.indent && (props.direction === 'all' || props.direction === 'top' || props.direction === 'vertical') ? `${props.size}px` : null)};
-  padding-right:  ${props => (props.indent && (props.direction === 'all' || props.direction === 'right' || props.direction === 'horizontal') ? `${props.size}px` : null)};
-  padding-bottom: ${props => (props.indent && (props.direction === 'all' || props.direction === 'bottom' || props.direction === 'vertical') ? `${props.size}px` : null)};
-  padding-left:   ${props => (props.indent && (props.direction === 'all' || props.direction === 'left' || props.direction === 'horizontal') ? `${props.size}px` : null)};
-  margin-top:     ${props => (!props.indent && (props.direction === 'all' || props.direction === 'top' || props.direction === 'vertical') ? `${props.size}px` : null)};
-  margin-right:   ${props => (!props.indent && (props.direction === 'all' || props.direction === 'right' || props.direction === 'horizontal') ? `${props.size}px` : null)};
-  margin-bottom:  ${props => (!props.indent && (props.direction === 'all' || props.direction === 'bottom' || props.direction === 'vertical') ? `${props.size}px` : null)};
-  margin-left:    ${props => (!props.indent && (props.direction === 'all' || props.direction === 'left' || props.direction === 'horizontal') ? `${props.size}px` : null)};
+  padding-top:    ${(props) => (props.indent && (props.direction === 'all' || props.direction === 'top' || props.direction === 'vertical') ? `${props.size}px` : null)};
+  padding-right:  ${(props) => (props.indent && (props.direction === 'all' || props.direction === 'right' || props.direction === 'horizontal') ? `${props.size}px` : null)};
+  padding-bottom: ${(props) => (props.indent && (props.direction === 'all' || props.direction === 'bottom' || props.direction === 'vertical') ? `${props.size}px` : null)};
+  padding-left:   ${(props) => (props.indent && (props.direction === 'all' || props.direction === 'left' || props.direction === 'horizontal') ? `${props.size}px` : null)};
+  margin-top:     ${(props) => (!props.indent && (props.direction === 'all' || props.direction === 'top' || props.direction === 'vertical') ? `${props.size}px` : null)};
+  margin-right:   ${(props) => (!props.indent && (props.direction === 'all' || props.direction === 'right' || props.direction === 'horizontal') ? `${props.size}px` : null)};
+  margin-bottom:  ${(props) => (!props.indent && (props.direction === 'all' || props.direction === 'bottom' || props.direction === 'vertical') ? `${props.size}px` : null)};
+  margin-left:    ${(props) => (!props.indent && (props.direction === 'all' || props.direction === 'left' || props.direction === 'horizontal') ? `${props.size}px` : null)};
 `;
 
 class Spacer extends PureComponent {

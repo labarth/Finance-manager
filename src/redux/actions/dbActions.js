@@ -10,7 +10,7 @@ export const dbActions = {
 };
 
 
-export const getItems = id => (dispatch) => {
+export const getItems = (id) => (dispatch) => {
   dispatch(dbActions.GET_DB_ITEMS_REQUEST(List()));
   const starCountRef = database.ref(`items/${id}`);
   return starCountRef.on('value', (snapshot) => {
@@ -22,7 +22,7 @@ export const getItems = id => (dispatch) => {
   });
 };
 
-export const getCategories = id => (dispatch) => {
+export const getCategories = (id) => (dispatch) => {
   dispatch(dbActions.GET_DB_CATEGORY_REQUEST(List()));
 
   const starCountRef = database.ref(`categories/${id}`);

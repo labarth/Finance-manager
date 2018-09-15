@@ -17,9 +17,10 @@ module.exports = {
       "ObjectExpression": "always",
     }],
     "no-unused-expressions": [2, { allowTernary: true }],
+    "arrow-parens": ["error", "always"],
   },
   "env": {
     "browser": true,
     "es6": true,
-  }
+  },
 };

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { List } from 'immutable';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Button from 'components/Button';
+import Button from 'components/Button/Button';
 import Title from 'components/Title';
 import { signOut } from 'redux/actions/authActions';
 import ViewExpense from '../components/ViewExpanse';

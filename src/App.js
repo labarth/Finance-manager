@@ -14,7 +14,7 @@ import 'configFirebase';
 import 'components/injectGlobalStyledComponent';
 import Layout from './components/Layout';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   user: state.auth.user,
 });
 
@@ -45,8 +45,8 @@ class App extends Component {
           <Route exact path="/" component={SideBar} />
           <Route exact path="/add" component={SideBar} />
           <Switch>
-            <Route exact path="/" render={props => <MainPage {...props} user={user} />} />
-            <Route exact path="/add" component={props => <AddExpensePage {...props} user={user} />} />
+            <Route exact path="/" render={(props) => <MainPage {...props} user={user} />} />
+            <Route exact path="/add" component={(props) => <AddExpensePage {...props} user={user} />} />
             <Route path="/signin" component={SignInPage} />
             <Route path="/signup" component={SignUpPage} />
             <Route component={() => <div>not found</div>} />

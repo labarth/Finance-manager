@@ -19,7 +19,7 @@ class SelectField extends PureComponent {
 
   render() {
     const { options, value, refs, onChange, name } = this.props;
-    const valueIndex = options.findIndex(option => option.get('value') === value);
+    const valueIndex = options.findIndex((option) => option.get('value') === value);
 
     return (
       <select
@@ -29,7 +29,7 @@ class SelectField extends PureComponent {
         name={name}
       >
         {
-          options.map(option => (
+          options.map((option) => (
             <option
               key={option.get('value')}
               value={option.get('value')}

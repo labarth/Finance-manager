@@ -6,7 +6,7 @@ import { Record } from 'immutable';
 import { signIn, signInWithGoogle } from 'redux/actions/authActions';
 import styled from 'styled-components';
 import TextField from 'components/TextField';
-import Button from 'components/Button';
+import Button from 'components/Button/Button';
 import Spacer from 'components/Spacer';
 import Title from 'components/Title';
 import Modal from 'components/Modal';
@@ -26,7 +26,7 @@ const FormComponent = styled.div`
   width: 360px;
 `;
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
@@ -121,8 +121,9 @@ class SignInPage extends PureComponent {
           <Spacer>
             <Link to={{
               to: '/signup',
-              pathname: '/signup'
-            }}>
+              pathname: '/signup',
+            }}
+            >
               <Button text="Sign Up" />
             </Link>
           </Spacer>

@@ -18,10 +18,10 @@ const IsIncomeComponent = styled.div`
   left: 0;
   width: 3px;
   height: 100%;
-  background-color: ${props => (props.isIncome ? 'green' : 'red')};
+  background-color: ${(props) => (props.isIncome ? 'green' : 'red')};
 `;
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   db: state.db,
 });
 
@@ -53,7 +53,7 @@ class ViewExpense extends Component {
 
     return (
       items.size ?
-        items.map(item => (
+        items.map((item) => (
           <ExpenseComponent key={item.id}>
             <div>{new Date(item.date).toLocaleDateString()}</div>
             <div>{`${item.price} BYN`}</div>

@@ -6,7 +6,7 @@ const TitleComponent = styled.h1`
   font-size: 30px;
   line-height: 42px;
   text-align: center;
-  color: ${props => props.color};
+  color: ${(props) => props.color};
 `;
 
 class Title extends PureComponent {
