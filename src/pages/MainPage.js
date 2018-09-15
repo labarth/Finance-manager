@@ -33,7 +33,12 @@ class MainPage extends Component {
         <Title title="Main Page" color="Black" />
         {user ? <ViewExpense user={user} categories={categories} /> : <CircularLoader /> }
         <p> {user ? `Hello ${user.email}` : 'Hello ....'} </p>
-        <Link to="/signin">
+        <Link
+          to={{
+            to: '/signin',
+            pathname: '/signin',
+          }}
+        >
           <Button text="SignOut" onClick={this.handleSignOut} />
         </Link>
       </LayoutContent>

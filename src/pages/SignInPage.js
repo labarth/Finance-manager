@@ -119,7 +119,10 @@ class SignInPage extends PureComponent {
             />
           </Spacer>
           <Spacer>
-            <Link to="/signUp">
+            <Link to={{
+              to: '/signup',
+              pathname: '/signup'
+            }}>
               <Button text="Sign Up" />
             </Link>
           </Spacer>

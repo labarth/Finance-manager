@@ -47,8 +47,8 @@ class App extends Component {
           <Switch>
             <Route exact path="/" render={props => <MainPage {...props} user={user} />} />
             <Route exact path="/add" component={props => <AddExpensePage {...props} user={user} />} />
-            <Route path="/signup" component={SignUpPage} />
             <Route path="/signin" component={SignInPage} />
+            <Route path="/signup" component={SignUpPage} />
             <Route component={() => <div>not found</div>} />
           </Switch>
         </Layout>

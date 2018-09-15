@@ -17,12 +17,26 @@ class SideBar extends PureComponent {
     return (
       <SideBarComponent>
         <div>
-          <NavLink exact activeStyle={{ background: 'red' }} to="/">
+          <NavLink
+            to={{ to: '/', pathname: '/' }}
+            exact
+            activeStyle={{
+              fontWeight: 'bold',
+              color: 'red',
+            }}
+
+          >
             Main Page
           </NavLink>
         </div>
         <div>
-          <NavLink activeStyle={{ background: 'red' }} to="/add">
+          <NavLink
+            to={{ to: '/add', pathname: '/add' }}
+            activeStyle={{
+              fontWeight: 'bold',
+              color: 'red',
+            }}
+          >
             Add Expense Page
           </NavLink>
         </div>
