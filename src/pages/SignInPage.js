@@ -6,7 +6,7 @@ import { Record } from 'immutable';
 import { signIn, signInWithGoogle } from 'redux/actions/authActions';
 import styled from 'styled-components';
 import TextField from 'components/TextField';
-import Button from 'components/Button/Button';
+import { Button } from 'components/Button/Button';
 import Spacer from 'components/Spacer';
 import Title from 'components/Title';
 import Modal from 'components/Modal';
@@ -109,6 +109,7 @@ class SignInPage extends PureComponent {
               <Button
                 text="Sing In"
                 disabled={loading}
+                fullWidth
               />
             </Spacer>
           </form>
@@ -116,6 +117,7 @@ class SignInPage extends PureComponent {
             <Button
               text="Sign In With Google"
               onClick={this.handleSingInWithGoogle}
+              fullWidth
             />
           </Spacer>
           <Spacer>
@@ -124,7 +126,10 @@ class SignInPage extends PureComponent {
               pathname: '/signup',
             }}
             >
-              <Button text="Sign Up" />
+              <Button
+                text="Sign Up"
+                fullWidth
+              />
             </Link>
           </Spacer>
         </FormComponent>

@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import v4 from 'uuid';
 import Spacer from 'components/Spacer';
 import TextField from 'components/TextField';
-import Button from 'components/Button/Button';
+import { Button } from 'components/Button/Button';
 import Title from 'components/Title';
 import Checkbox from 'components/Checkbox';
 import SelectField from 'components/SelectField';

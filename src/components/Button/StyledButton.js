@@ -1,16 +1,16 @@
 import styled from 'styled-components';
 
 export const StyledButton = styled.button`
+  background-color: ${(props) => (props.backgroundColor)};
+  width: ${(props) => (props.fullWidth && '100%')};
+  color: ${(props) => (props.color)};
   font-size: 14px;
   line-height: 36px;
+  letter-spacing: 1.3px;
   padding: 0 12px;
-  background-color: dodgerblue;
-  width: ${(props) => (props.fullWidth && '100%')};
-  color: white;
   border-radius: 4px;
   border: none;
   text-transform: uppercase;
-  letter-spacing: 1.3px;
   font-family: Verdana, sans-serif;
   outline: none;
   
@@ -20,5 +20,6 @@ export const StyledButton = styled.button`
   
   &[disabled] {
     opacity: 0.5;
+    pointer-events: none;
   }
 `;
