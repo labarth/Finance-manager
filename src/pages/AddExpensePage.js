@@ -11,7 +11,7 @@ import Title from 'components/Title';
 import Checkbox from 'components/Checkbox';
 import SelectField from 'components/SelectField';
 import { database } from 'configFirebase';
-import { getCategories } from '../redux/actions/dbActions';
+import { getCategories } from '../redux/actions/categoryActions';
 
 const WrapperComponent = styled.section`
   width: 420px;
@@ -20,7 +20,8 @@ const WrapperComponent = styled.section`
 `;
 
 const mapStateToProps = (state) => ({
-  categories: state.db.categories,
+  user: state.auth.user,
+  categories: state.categories.list,
 });
 
 @connect(mapStateToProps, { getCategories })
@@ -81,6 +82,8 @@ class AddExpensePage extends Component {
     const { categoryName } = this.state;
     const refDB = database.ref(`categories/${this.props.user.uid}`);
     refDB.push({ label: categoryName, value: v4() });
+
+    this.setState({ categoryName: '' });
   }
 
   handleSubmit = (e) => {
