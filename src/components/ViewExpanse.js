@@ -4,6 +4,7 @@ import { Record } from 'immutable';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getItems } from 'redux/actions/dbActions';
+import CircularLoader from 'components/CircularLoader';
 import styled from 'styled-components';
 
 const ExpenseComponent = styled.div`
@@ -48,7 +49,7 @@ class ViewExpense extends Component {
     }
   }
 
-  render() {
+  renderListItems = () => {
     const { db: { items } } = this.props;
 
     return (
@@ -63,6 +64,14 @@ class ViewExpense extends Component {
           </ExpenseComponent>
         )) :
         <div>not items</div>
+    );
+  }
+
+  render() {
+    const { db: { loading } } = this.props;
+
+    return (
+      loading ? <CircularLoader /> : this.renderListItems()
     );
   }
 }
