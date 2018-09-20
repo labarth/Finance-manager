@@ -1,6 +1,7 @@
 import firebase from 'firebase';
 import { createAction } from 'redux-actions';
 import { appId } from 'configFirebase';
+import { getItems } from './itemActions';
 
 export const moduleName = 'auth';
 
@@ -54,6 +55,7 @@ export const signInWithGoogle = () => (dispatch) => {
     .then((result) => {
       const { user } = result;
       dispatch(SING_IN_SUCCESS(user));
+      dispatch(getItems(user.uid));
     })
     .catch((error) => {
       dispatch(SING_ERROR(error));
@@ -77,6 +79,7 @@ export const authChanged = (history) => (dispatch) => {
   return firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       dispatch(SING_IN_SUCCESS(user));
+      dispatch(getItems(user.uid));
     } else {
       history.push('/signin');
     }

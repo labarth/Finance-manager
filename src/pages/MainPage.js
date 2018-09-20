@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { signOut } from 'redux/actions/authActions';
-import { getItems } from 'redux/actions/itemActions';
 
 import { Button } from 'components/Button/Button';
 import { CostList } from 'components/CostList/List/CostList';
@@ -18,7 +17,7 @@ const mapStateToProps = (state) => ({
   user: state.auth.user,
 })
 
-@connect(mapStateToProps, { signOut, getItems })
+@connect(mapStateToProps, { signOut })
 class MainPage extends Component {
   static propTypes = {
     user: PropTypes.shape({}),
