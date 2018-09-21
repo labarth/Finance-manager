@@ -2,6 +2,7 @@ import firebase from 'firebase';
 import { createAction } from 'redux-actions';
 import { appId } from 'configFirebase';
 import { getItems } from './itemActions';
+import { getCategories } from './categoryActions';
 
 export const moduleName = 'auth';
 
@@ -56,6 +57,7 @@ export const signInWithGoogle = () => (dispatch) => {
       const { user } = result;
       dispatch(SING_IN_SUCCESS(user));
       dispatch(getItems(user.uid));
+      dispatch(getCategories(user.uid));
     })
     .catch((error) => {
       dispatch(SING_ERROR(error));
@@ -80,6 +82,7 @@ export const authChanged = (history) => (dispatch) => {
     if (user) {
       dispatch(SING_IN_SUCCESS(user));
       dispatch(getItems(user.uid));
+      dispatch(getCategories(user.uid));
     } else {
       history.push('/signin');
     }
