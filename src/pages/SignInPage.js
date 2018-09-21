@@ -61,7 +61,7 @@ class SignInPage extends PureComponent {
     e.preventDefault();
     const { history } = this.props;
     const { email, password } = this.state;
-    this.props.signIn(email, password, history);
+    this.props.signIn(email, password);
   }
 
   handleChange = (e) => {
@@ -69,7 +69,7 @@ class SignInPage extends PureComponent {
     this.setState({ [name]: value });
   }
 
-  handleSingInWithGoogle = () => this.props.signInWithGoogle(this.props.history);
+  handleSingInWithGoogle = () => this.props.signInWithGoogle();
 
   handleOpenModal = () => this.setState({ isModalOpen: true });
   handleCloseModal = () => this.setState({ isModalOpen: false });

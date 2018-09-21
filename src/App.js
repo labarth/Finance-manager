@@ -25,8 +25,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { authChangedAction, history } = this.props;
-    authChangedAction(history);
+    const { authChangedAction } = this.props;
+    authChangedAction();
   }
 
   render() {

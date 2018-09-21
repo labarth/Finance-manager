@@ -1,6 +1,7 @@
 import firebase from 'firebase';
 import { createAction } from 'redux-actions';
 import { appId } from 'configFirebase';
+import history from 'history';
 import { getItems } from './itemActions';
 import { getCategories } from './categoryActions';
 
@@ -36,7 +37,7 @@ export const signUp = (email, password) => (dispatch) => {
     });
 };
 
-export const signIn = (email, password, history) => (dispatch) => {
+export const signIn = (email, password) => (dispatch) => {
   dispatch(SING_REQUEST());
 
   return firebase.auth().signInWithEmailAndPassword(email, password)
@@ -49,7 +50,7 @@ export const signIn = (email, password, history) => (dispatch) => {
     });
 };
 
-export const signInWithGoogle = (history) => async (dispatch) => {
+export const signInWithGoogle = () => async (dispatch) => {
   await dispatch(SING_REQUEST);
   try {
     const { user } = await firebase.auth().signInWithPopup(provider);
@@ -74,7 +75,7 @@ export const signOut = () => (dispatch) => {
     });
 };
 
-export const authChanged = (history) => (dispatch) => {
+export const authChanged = () => (dispatch) => {
   dispatch(SING_REQUEST);
 
   return firebase.auth().onAuthStateChanged((user) => {
