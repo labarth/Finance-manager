@@ -49,21 +49,19 @@ export const signIn = (email, password, history) => (dispatch) => {
     });
 };
 
-export const signInWithGoogle = () => (dispatch) => {
-  dispatch(SING_REQUEST);
+export const signInWithGoogle = (history) => async (dispatch) => {
+  await dispatch(SING_REQUEST);
+  try {
+    const { user } = await firebase.auth().signInWithPopup(provider);
 
-  return firebase.auth().signInWithPopup(provider)
-    .then((result) => {
-      const { user } = result;
-      dispatch(SING_IN_SUCCESS(user));
-      dispatch(getItems(user.uid));
-      dispatch(getCategories(user.uid));
-    })
-    .catch((error) => {
-      dispatch(SING_ERROR(error));
-    });
+    await dispatch(SING_IN_SUCCESS(user));
+    await dispatch(getItems(user.uid));
+    await dispatch(getCategories(user.uid));
+    await history.push('/');
+  } catch (error) {
+    dispatch(SING_ERROR(error));
+  }
 };
-
 export const signOut = () => (dispatch) => {
   dispatch(SING_REQUEST);
 
