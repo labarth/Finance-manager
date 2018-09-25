@@ -25,22 +25,23 @@ const {
 
 const provider = new firebase.auth.GoogleAuthProvider();
 
-export const signUp = (email, password) => (dispatch) => {
-  dispatch(SING_REQUEST());
+export const signUp = (email, password) => async (dispatch) => {
+  await dispatch(SING_REQUEST());
 
-  return firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then((user) => {
-      dispatch(SING_UP_SUCCESS(user));
-    })
-    .catch((error) => {
-      dispatch(SING_ERROR(error));
-    });
+  try {
+    const user = await firebase.auth().createUserWithEmailAndPassword(email, password);
+    await dispatch(SING_UP_SUCCESS(user));
+    await await history.push('/');
+  } catch (error) {
+    dispatch(SING_ERROR(error));
+  }
 };
 
 export const signIn = (email, password) => async (dispatch) => {
   await dispatch(SING_REQUEST());
-  const user = await firebase.auth().signInWithEmailAndPassword(email, password);
+
   try {
+    const user = await firebase.auth().signInWithEmailAndPassword(email, password);
     await dispatch(SING_IN_SUCCESS(user));
     await history.push('/');
   } catch (error) {
