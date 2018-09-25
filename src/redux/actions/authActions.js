@@ -37,17 +37,15 @@ export const signUp = (email, password) => (dispatch) => {
     });
 };
 
-export const signIn = (email, password) => (dispatch) => {
-  dispatch(SING_REQUEST());
-
-  return firebase.auth().signInWithEmailAndPassword(email, password)
-    .then((user) => {
-      dispatch(SING_IN_SUCCESS(user));
-      history.push('/');
-    })
-    .catch((error) => {
-      dispatch(SING_ERROR(error));
-    });
+export const signIn = (email, password) => async (dispatch) => {
+  await dispatch(SING_REQUEST());
+  const user = await firebase.auth().signInWithEmailAndPassword(email, password);
+  try {
+    await dispatch(SING_IN_SUCCESS(user));
+    await history.push('/');
+  } catch (error) {
+    dispatch(SING_ERROR(error));
+  }
 };
 
 export const signInWithGoogle = () => async (dispatch) => {
