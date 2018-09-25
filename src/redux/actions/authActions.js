@@ -53,11 +53,10 @@ export const signInWithGoogle = () => async (dispatch) => {
   await dispatch(SING_REQUEST);
   try {
     const { user } = await firebase.auth().signInWithPopup(provider);
-
-    dispatch(SING_IN_SUCCESS(user));
-    dispatch(getItems(user.uid));
-    dispatch(getCategories(user.uid));
-    history.push('/');
+    await dispatch(SING_IN_SUCCESS(user));
+    await dispatch(getItems(user.uid));
+    await dispatch(getCategories(user.uid));
+    await history.push('/');
   } catch (error) {
     dispatch(SING_ERROR(error));
   }
