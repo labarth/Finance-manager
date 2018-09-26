@@ -21,7 +21,6 @@ const WrapperComponent = styled.section`
 const mapStateToProps = (state) => ({
   auth: state.auth,
   categories: state.categories,
-  userLoading: state.auth.loading,
 });
 
 @connect(mapStateToProps)

@@ -16,22 +16,15 @@ import LayoutContent from 'components/LayoutContent';
 @connect(null, { signOut })
 class MainPage extends Component {
   static propTypes = {
-    user: PropTypes.shape({}),
     signOut: PropTypes.func.isRequired,
   };
-
-  static defaultProps = {
-    user: {},
-  }
 
   handleSignOut = () => this.props.signOut();
 
   render() {
-    const { user } = this.props;
-
     return (
       <LayoutContent>
-        <CostPage user={user} />
+        <CostPage />
         <Link
           to={{
             to: '/signin',

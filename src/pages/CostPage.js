@@ -12,9 +12,6 @@ const mapStateToProps = (state) => ({
 @connect(mapStateToProps, null)
 class CostPage extends Component {
   static propTypes = {
-    user: PropTypes.shape({
-      uid: PropTypes.string,
-    }).isRequired,
     costList: PropTypes.instanceOf(Record).isRequired,
   };
 

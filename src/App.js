@@ -57,7 +57,7 @@ class App extends Component {
           <Route exact path="/" component={SideBar} />
           <Route exact path="/add" component={SideBar} />
           <Switch>
-            <Route exact path="/" render={() => (<MainPage user={auth.user} />)} />
+            <Route exact path="/" component={MainPage} />
             <Route exact path="/add" component={AddExpensePage} />
             <Route path="/signin" component={SignInPage} />
             <Route path="/signup" component={SignUpPage} />
