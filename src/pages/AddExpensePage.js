@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { List } from 'immutable';
+import { Record } from 'immutable';
 import { connect } from 'react-redux';
 import v4 from 'uuid';
 import Spacer from 'components/Spacer';
@@ -27,11 +27,11 @@ const mapStateToProps = (state) => ({
 class AddExpensePage extends Component {
   static propTypes = {
     auth: PropTypes.shape({}).isRequired,
-    categories: PropTypes.instanceOf(List),
+    categories: PropTypes.instanceOf(Record),
   };
 
   static defaultProps = {
-    categories: List(),
+    categories: Record(),
   };
 
   state = {
