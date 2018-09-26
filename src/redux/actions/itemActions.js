@@ -8,7 +8,7 @@ export const itemActions = {
 };
 
 export const getItems = (id) => (dispatch) => {
-  dispatch(itemActions.GET_DB_ITEMS_REQUEST(List()));
+  dispatch(itemActions.GET_DB_ITEMS_REQUEST());
   const itemsRef = database.ref(`items/${id}`);
   return itemsRef.on('value', (snapshot) => {
     const items = [];

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Record } from 'immutable';
-import CircularLoader from 'components/CircularLoader';
 import { CostList } from 'components/CostList/List/CostList';
 
 const mapStateToProps = (state) => ({
@@ -19,19 +18,11 @@ class CostPage extends Component {
     costList: PropTypes.instanceOf(Record).isRequired,
   };
 
-  renderListItems = () => {
+  render() {
     const { costList: { list } } = this.props;
 
     return (
       list.size ? <CostList list={list} /> : <div>not items</div>
-    );
-  }
-
-  render() {
-    const { costList: { loading } } = this.props;
-
-    return (
-      loading ? <CircularLoader /> : this.renderListItems()
     );
   }
 }

@@ -13,13 +13,15 @@ const ItemsSchema = Record({
 
 const initialState = new ItemsSchema();
 
-const getDbCategoriesRequest = (state = initialState, { payload }) => state
-  .set('loading', true)
-  .set('list', payload);
+const getDbCategoriesRequest = (state = initialState) => state
+  .set('loading', true);
 
-const getDbCategoriesSuccess = (state = initialState, { payload }) => state
-  .set('loading', false)
-  .set('list', payload);
+const getDbCategoriesSuccess = (state = initialState, { payload }) => {
+  if (payload.size) {
+    return state.set('loading', false).set('list', payload);
+  }
+  return state.set('loading', false);
+};
 
 export const categories = handleActions({
   [categoryActions.GET_DB_CATEGORY_REQUEST]: getDbCategoriesRequest,

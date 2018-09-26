@@ -7,36 +7,57 @@ import 'components/GlobalStyled/injectGlobalStyledComponent';
 
 import { authChanged } from 'redux/actions/authActions';
 
-import Page from 'components/Page';
+import MainPage from 'pages/MainPage';
 import SignUpPage from 'pages/SignUpPage';
 import SignInPage from 'pages/SignInPage';
-import SideBar from 'components/SideBar';
 import AddExpensePage from 'pages/AddExpensePage';
-import MainPage from 'pages/MainPage';
-import Layout from './components/Layout';
+import SideBar from 'components/SideBar';
+import Page from 'components/Page';
+import Layout from 'components/Layout';
+import CircularLoader from 'components/CircularLoader';
 
-@connect(null, { authChangedAction: authChanged })
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  list: state.costList,
+  categories: state.categories,
+});
+
+@connect(mapStateToProps, { authChangedAction: authChanged })
 class App extends Component {
   static propTypes = {
     history: PropTypes.shape({
       push: PropTypes.func,
     }).isRequired,
     authChangedAction: PropTypes.func.isRequired,
+    auth: PropTypes.shape({}),
+    list: PropTypes.shape({}),
+    categories: PropTypes.shape({}),
   }
 
-  componentDidMount() {
+  static defaultProps = {
+    auth: {},
+    list: {},
+    categories: {},
+  }
+
+  componentWillMount() {
     const { authChangedAction } = this.props;
     authChangedAction();
   }
 
   render() {
+    const { auth, list, categories } = this.props;
+    const loading = auth.loading || list.loading || categories.loading;
+
     return (
+      loading ? <CircularLoader /> :
       <Page>
         <Layout>
           <Route exact path="/" component={SideBar} />
           <Route exact path="/add" component={SideBar} />
           <Switch>
-            <Route exact path="/" component={MainPage} />
+            <Route exact path="/" render={() => (<MainPage user={auth.user} />)} />
             <Route exact path="/add" component={AddExpensePage} />
             <Route path="/signin" component={SignInPage} />
             <Route path="/signup" component={SignUpPage} />

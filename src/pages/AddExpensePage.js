@@ -10,7 +10,6 @@ import { Button } from 'components/Button/Button';
 import Title from 'components/Title';
 import Checkbox from 'components/Checkbox';
 import SelectField from 'components/SelectField';
-import CircularLoader from 'components/CircularLoader';
 import { database } from 'configFirebase';
 
 const WrapperComponent = styled.section`
@@ -101,10 +100,9 @@ class AddExpensePage extends Component {
   }
 
   render() {
-    const { categories: { list, loading }, auth } = this.props;
+    const { categories: { list } } = this.props;
 
     return (
-      loading || auth.loading ? <CircularLoader /> :
       <WrapperComponent>
         <Spacer>
           <Title title="Add Expense" />

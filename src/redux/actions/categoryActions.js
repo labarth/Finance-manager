@@ -8,7 +8,7 @@ export const categoryActions = {
 };
 
 export const getCategories = (id) => (dispatch) => {
-  dispatch(categoryActions.GET_DB_CATEGORY_REQUEST(List()));
+  dispatch(categoryActions.GET_DB_CATEGORY_REQUEST());
 
   const starCountRef = database.ref(`categories/${id}`);
   return starCountRef.on('value', (snapshot) => {

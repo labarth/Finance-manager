@@ -13,11 +13,7 @@ import CostPage from 'pages/CostPage';
 import CircularLoader from 'components/CircularLoader';
 import LayoutContent from 'components/LayoutContent';
 
-const mapStateToProps = (state) => ({
-  user: state.auth.user,
-})
-
-@connect(mapStateToProps, { signOut })
+@connect(null, { signOut })
 class MainPage extends Component {
   static propTypes = {
     user: PropTypes.shape({}),
@@ -35,7 +31,7 @@ class MainPage extends Component {
 
     return (
       <LayoutContent>
-        {user ? <CostPage user={user} /> : <CircularLoader /> }
+        <CostPage user={user} />
         <Link
           to={{
             to: '/signin',

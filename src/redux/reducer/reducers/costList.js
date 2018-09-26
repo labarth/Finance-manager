@@ -9,9 +9,8 @@ const ItemsSchema = Record({
 
 const initialState = new ItemsSchema();
 
-const getDbItemsRequest = (state = initialState, { payload }) => state
-  .set('loading', true)
-  .set('list', payload);
+const getDbItemsRequest = (state = initialState) => state
+  .set('loading', true);
 
 const getDbItemsSuccess = (state = initialState, { payload }) => state
   .set('loading', false)
