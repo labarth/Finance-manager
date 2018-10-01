@@ -3,8 +3,8 @@ import { handleActions } from 'redux-actions';
 import { itemActions } from 'redux/actions/itemActions';
 
 const ItemsSchema = Record({
-  loading: false,
   list: List(),
+  loading: false,
 });
 
 const initialState = new ItemsSchema();
