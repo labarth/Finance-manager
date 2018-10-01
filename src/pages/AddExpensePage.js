@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { database } from 'configFirebase';
 import styled from 'styled-components';
 import { Record } from 'immutable';
 import { connect } from 'react-redux';
@@ -10,7 +11,7 @@ import { Button } from 'components/Button/Button';
 import Title from 'components/Title';
 import Checkbox from 'components/Checkbox';
 import SelectField from 'components/SelectField';
-import { database } from 'configFirebase';
+import { AddCategoryModal } from 'components/AddCategoryModal/AddCategoryModal';
 
 const WrapperComponent = styled.section`
   width: 420px;
@@ -34,9 +35,10 @@ class AddExpensePage extends Component {
     categories: Record(),
   };
 
+
   state = {
-    isInvalidCategory: false,
-  }
+    show: false,
+  };
 
   componentDidMount() {
     this.setState({
@@ -52,30 +54,12 @@ class AddExpensePage extends Component {
     });
   }
 
-  handleAddCategoryChange = (e) => {
-    const { target: { value } } = e;
-    const { categories: { list } } = this.props;
-    if (list.size) {
-      const isInvalidCategory = !!list.find((category) => category.get('label') === value);
-      this.setState({ isInvalidCategory });
-    }
-    this.setState({ [e.target.name]: value });
-  }
+  handleShow = () => this.setState({ show: true });
+
+  handleClose = () => this.setState({ show: false })
 
   handleChangeCheckBox = (e) => {
     this.setState({ [e.target.name]: this.checkbox.checked });
-  }
-
-  handleAddCategory = (e) => {
-    e.preventDefault();
-
-    const { auth: { user } } = this.props;
-
-    const { categoryName } = this.state;
-    const refDB = database.ref(`categories/${user.uid}`);
-    refDB.push({ label: categoryName, value: v4() });
-
-    this.setState({ categoryName: '' });
   }
 
   handleSubmit = (e) => {
@@ -105,15 +89,6 @@ class AddExpensePage extends Component {
       <WrapperComponent>
         <Spacer>
           <Title title="Add Expense" />
-          <form onSubmit={this.handleAddCategory}>
-            <TextField
-              type="text"
-              placeholder="Enter category name..."
-              onChange={this.handleAddCategoryChange}
-              name="categoryName"
-            />
-            <Button text="Ok" disabled={this.state.isInvalidCategory} />
-          </form>
           <form onSubmit={this.handleSubmit}>
             <Spacer direction="vertical" size={20} indent={false}>
               <Checkbox
@@ -129,6 +104,7 @@ class AddExpensePage extends Component {
                 name="category"
                 refs={(select) => { this.select = select; }}
               />
+              <Button text="add custom category" onClick={this.handleShow} />
             </Spacer>
             <Spacer direction="vertical" size={20} indent={false}>
               <TextField
@@ -151,6 +127,7 @@ class AddExpensePage extends Component {
             </Spacer>
           </form>
         </Spacer>
+        {this.state.show ? <AddCategoryModal onCloseModal={this.handleClose} /> : null}
       </WrapperComponent>
     );
   }
