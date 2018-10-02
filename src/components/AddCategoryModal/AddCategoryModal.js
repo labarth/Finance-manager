@@ -14,7 +14,7 @@ const mapStateToProps = (state) => ({
 });
 
 @connect(mapStateToProps, null)
-class AddCategoryModal extends PureComponent {
+class CategoryModal extends PureComponent {
   static propTypes = {
     auth: PropTypes.shape({}),
     categories: PropTypes.instanceOf(Record),
@@ -72,4 +72,4 @@ class AddCategoryModal extends PureComponent {
   }
 }
 
-export { AddCategoryModal };
+export { CategoryModal };

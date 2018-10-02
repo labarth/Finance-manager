@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Route, withRouter, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
 import 'configFirebase';
 import 'components/GlobalStyled/injectGlobalStyledComponent';
-
-import { authChanged } from 'redux/actions/authActions';
 
 import MainPage from 'pages/MainPage';
 import SignUpPage from 'pages/SignUpPage';
@@ -16,14 +13,6 @@ import Page from 'components/Page';
 import Layout from 'components/Layout';
 import CircularLoader from 'components/CircularLoader';
 
-
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-  list: state.costList,
-  categories: state.categories,
-});
-
-@connect(mapStateToProps, { authChangedAction: authChanged })
 class App extends Component {
   static propTypes = {
     history: PropTypes.shape({
@@ -69,4 +58,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+export default App;

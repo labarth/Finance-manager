@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import styledNormalize from 'styled-normalize';
 import { injectGlobal } from 'styled-components';
-import App from './App';
+import { App } from './containers/AppContainer';
 import configureStore from './store/configureStore';
 import history from './history';
 
