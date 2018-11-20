@@ -13,8 +13,8 @@ const mapStateToProps = (state) => ({
   categories: state.categories,
 });
 
-@connect(mapStateToProps, null)
-class CategoryModal extends PureComponent {
+@connect(mapStateToProps)
+class AddCategoryModal extends PureComponent {
   static propTypes = {
     auth: PropTypes.shape({}),
     categories: PropTypes.instanceOf(Record),
@@ -33,13 +33,13 @@ class CategoryModal extends PureComponent {
   handleAddCategory = (e) => {
     e.preventDefault();
 
-    const { auth: { user } } = this.props;
+    const { auth: { user }, onCloseModal } = this.props;
 
     const { categoryName } = this.state;
     const refDB = database.ref(`categories/${user.uid}`);
     refDB.push({ label: categoryName, value: v4() });
 
-    this.setState({ categoryName: '' });
+    this.setState({ categoryName: '' }, onCloseModal);
   }
 
   handleAddCategoryChange = (e) => {
@@ -72,4 +72,4 @@ class CategoryModal extends PureComponent {
   }
 }
 
-export { CategoryModal };
+export { AddCategoryModal };
