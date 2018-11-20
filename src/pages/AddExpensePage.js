@@ -89,6 +89,7 @@ class AddExpensePage extends Component {
       <WrapperComponent>
         <Spacer>
           <Title title="Add Expense" />
+          <Button text="add custom category" onClick={this.handleShow} />
           <form onSubmit={this.handleSubmit}>
             <Spacer direction="vertical" size={20} indent={false}>
               <Checkbox
@@ -104,7 +105,6 @@ class AddExpensePage extends Component {
                 name="category"
                 refs={(select) => { this.select = select; }}
               />
-              <Button text="add custom category" onClick={this.handleShow} />
             </Spacer>
             <Spacer direction="vertical" size={20} indent={false}>
               <TextField
